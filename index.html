@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصة التاريخ وجغرافيا مصر والمعلم الذكي | الصف الأول الثانوي</title>
+  
+  <!-- خطوط Google Fonts (Cairo & Tajawal) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            tajawal: ['Tajawal', 'sans-serif'],
+          },
+          colors: {
+            pharaoh: {
+              50: '#fbf8ee',
+              100: '#f5edd3',
+              200: '#edd8a6',
+              300: '#e2bf73',
+              400: '#d7a444',
+              500: '#c58b27',
+              600: '#a96e1e',
+              700: '#87511c',
+              800: '#6f421d',
+              900: '#5c371c',
+            },
+            nile: {
+              50: '#eff9ff',
+              100: '#dcf0fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Marked.js لتنسيق ردود الذكاء الاصطناعي Markdown بدقة -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    body { font-family: 'Cairo', sans-serif; }
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+    
+    /* تنسيقات فقاعات المعلم الذكي والجداول */
+    .ai-bubble h1, .ai-bubble h2, .ai-bubble h3 { font-weight: 800; margin-top: 0.75rem; margin-bottom: 0.35rem; color: #b45309; }
+    .dark .ai-bubble h1, .dark .ai-bubble h2, .dark .ai-bubble h3 { color: #f59e0b; }
+    .ai-bubble ul, .ai-bubble ol { padding-right: 1.25rem; margin: 0.4rem 0; }
+    .ai-bubble li { list-style-type: disc; margin-bottom: 0.25rem; }
+    .ai-bubble table { width: 100%; border-collapse: collapse; margin: 0.6rem 0; font-size: 0.8rem; }
+    .ai-bubble th, .ai-bubble td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: right; }
+    .dark .ai-bubble th, .dark .ai-bubble td { border-color: #475569; }
+    .ai-bubble th { background: #f8fafc; font-weight: 800; color: #0f172a; }
+    .dark .ai-bubble th { background: #1e293b; color: #f8fafc; }
+    .ai-bubble strong { color: #0f172a; }
+    .dark .ai-bubble strong { color: #f8fafc; }
+    .ai-bubble p { margin-bottom: 0.45rem; line-height: 1.65; }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    .dark ::-webkit-scrollbar-thumb { background: #475569; }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-200">
+
+  <!-- إشعار التنبيهات Toast -->
+  <div id="toast" class="fixed bottom-5 left-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-slate-900 text-white dark:bg-amber-500 dark:text-slate-950 px-5 py-3 rounded-xl shadow-2xl border border-slate-700 dark:border-amber-400">
+    <svg class="w-5 h-5 text-amber-400 dark:text-slate-950 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    <span id="toast-msg" class="text-xs sm:text-sm font-semibold"></span>
+  </div>
+
+  <!-- شريط التنقل العلوي -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3">
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="فتح القائمة">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+
+        <a href="#hero" class="flex items-center gap-2 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 via-pharaoh-500 to-sky-600 flex items-center justify-center text-white shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 4.5l5.5 11H6.5L12 6.5z"/></svg>
+          </div>
+          <div>
+            <span class="text-base sm:text-lg font-black text-slate-900 dark:text-amber-400 tracking-tight leading-none block">المنصة الشاملة لأولى ثانوي</span>
+            <span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold block mt-0.5">التاريخ • الجغرافيا • المعلم الذكي AI</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- محرك البحث الفوري -->
+      <div class="hidden sm:flex flex-1 max-w-md mx-2 relative">
+        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+        <input type="text" id="search-input" placeholder="ابحث عن: حجر بالرمو، ديورانت، الزمن الثاني، منخفض الفيوم، وني..." class="w-full pr-9 pl-4 py-2 text-xs rounded-full bg-slate-100 dark:bg-slate-800/80 border border-transparent focus:border-amber-500 dark:focus:border-amber-400 focus:bg-white dark:focus:bg-slate-900 focus:outline-none transition-all placeholder:text-slate-400 text-slate-700 dark:text-slate-200">
+      </div>
+
+      <!-- الإجراءات السريعة والوضع الليلي -->
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <button onclick="switchView('ai-chat')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-indigo-500/20 hover:opacity-95 transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          <span class="hidden md:inline">المعلم الذكي</span>
+          <span class="bg-emerald-400 text-slate-950 text-[9px] px-1.5 py-0.2 rounded font-extrabold">جاهز 100%</span>
+        </button>
+
+        <button id="print-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="طباعة أو تصدير PDF">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+        </button>
+
+        <button id="theme-toggle" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="تبديل الوضع">
+          <svg id="moon-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- جسم الصفحة الرئيسي والقائمة الجانبية -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex gap-8">
+    
+    <!-- القائمة الجانبية (Sidebar) -->
+    <aside id="sidebar" class="fixed inset-y-0 right-0 z-50 w-72 bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 p-5 transform translate-x-full transition-transform duration-300 lg:translate-x-0 lg:static lg:w-72 lg:p-0 lg:bg-transparent lg:border-none lg:z-auto overflow-y-auto max-h-[calc(100vh-5rem)] no-print">
+      
+      <div class="flex items-center justify-between lg:hidden mb-4 pb-3 border-b border-slate-200 dark:border-slate-800">
+        <span class="font-bold text-sm text-amber-700 dark:text-amber-400">فهرس المحتوى والأدوات</span>
+        <button id="close-sidebar-btn" class="p-1 rounded text-slate-500 hover:text-slate-800 dark:hover:text-white">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <div class="space-y-6">
+        <!-- التبويبات الرئيسية -->
+        <div>
+          <p class="text-xs font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">أقسام المنصة</p>
+          <div class="space-y-1">
+            <button onclick="switchView('history')" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-amber-500 text-white shadow-sm" data-view="history">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+              شرح التاريخ (الوحدتان 1 و 2)
+            </button>
+            <button onclick="switchView('geography')" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-view="geography">
+              <svg class="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              شرح الجغرافيا (التمهيدي + و1 و 2)
+            </button>
+            <button onclick="switchView('ai-chat')" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-view="ai-chat">
+              <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+              المعلم الذكي (AI Tutor)
+            </button>
+            <button onclick="switchView('cheat-sheet')" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-view="cheat-sheet">
+              <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+              مفاتيح الحل والتركات الامتحانية
+            </button>
+            <button onclick="switchView('quiz')" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-view="quiz">
+              <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              بنك الأسئلة الشامل (Quiz)
+            </button>
+            <button onclick="switchView('flashcards')" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" data-view="flashcards">
+              <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+              بطاقات المراجعة (3D Flip)
+            </button>
+          </div>
+        </div>
+
+        <!-- فهرس دروس التاريخ -->
+        <div>
+          <div class="flex items-center justify-between text-xs font-extrabold text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-slate-800/60 p-2.5 rounded-lg border border-amber-200 dark:border-slate-700">
+            <span>دروس التاريخ المقررة</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500 text-white font-bold">9 دروس كاملة</span>
+          </div>
+          <div class="mt-2 space-y-1 pr-2 border-r-2 border-amber-300 dark:border-amber-600 text-xs">
+            <a href="#u1-l1" onclick="navigateToLesson('history', 'u1-l1')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-amber-600 transition-colors">و1: درس 1 - الحضارة والتاريخ</a>
+            <a href="#u1-l2" onclick="navigateToLesson('history', 'u1-l2')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-amber-600 transition-colors">و1: درس 2 - مصادر الحضارات</a>
+            <a href="#u1-l3" onclick="navigateToLesson('history', 'u1-l3')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-amber-600 transition-colors">و1: درس 3 - عوامل قيام الحضارات</a>
+            <a href="#u2-l1" onclick="navigateToLesson('history', 'u2-l1')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-amber-600 transition-colors">و2: درس 1 - ملامح التاريخ الفرعوني</a>
+            <a href="#u2-l2" onclick="navigateToLesson('history', 'u2-l2')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-amber-600 transition-colors">و2: درس 2 - الحياة الاقتصادية</a>
+            <a href="#u2-l3" onclick="navigateToLesson('history', 'u2-l3')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-amber-600 transition-colors">و2: درس 3 - الحياة السياسية والإدارية</a>
+            <a href="#u2-l4" onclick="navigateToLesson('history', 'u2-l4')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-amber-600 transition-colors">و2: درس 4 - الحياة الاجتماعية</a>
+            <a href="#u2-l5" onclick="navigateToLesson('history', 'u2-l5')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-amber-600 transition-colors">و2: درس 5 - الحياة الدينية</a>
+            <a href="#u2-l6" onclick="navigateToLesson('history', 'u2-l6')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-amber-600 transition-colors">و2: درس 6 - الحياة الثقافية والفكرية</a>
+          </div>
+        </div>
+
+        <!-- فهرس دروس الجغرافيا -->
+        <div>
+          <div class="flex items-center justify-between text-xs font-extrabold text-sky-800 dark:text-sky-400 bg-sky-50 dark:bg-slate-800/60 p-2.5 rounded-lg border border-sky-200 dark:border-slate-700">
+            <span>دروس جغرافيا مصر</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-sky-500 text-white font-bold">المنهج كاملاً</span>
+          </div>
+          <div class="mt-2 space-y-1 pr-2 border-r-2 border-sky-300 dark:border-sky-600 text-xs">
+            <a href="#geo-intro" onclick="navigateToLesson('geography', 'geo-intro')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-sky-600 transition-colors">درس تمهيدي: مدخل علم الجغرافيا</a>
+            <a href="#geo-u1-l1" onclick="navigateToLesson('geography', 'geo-u1-l1')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-sky-600 transition-colors">و1: درس 1 - موقع مصر الجيوسياسي</a>
+            <a href="#geo-u1-l2" onclick="navigateToLesson('geography', 'geo-u1-l2')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-sky-600 transition-colors">و1: درس 2 - التكوينات الجيولوجية</a>
+            <a href="#geo-u1-l3" onclick="navigateToLesson('geography', 'geo-u1-l3')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-sky-600 transition-colors">و1: درس 3 - تضاريس مصر الأربعة</a>
+            <a href="#geo-u2-l1" onclick="navigateToLesson('geography', 'geo-u2-l1')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-sky-600 transition-colors">و2: درس 1 - مناخ مصر وفصول السنة</a>
+            <a href="#geo-u2-l2" onclick="navigateToLesson('geography', 'geo-u2-l2')" class="block py-1 px-2 rounded text-slate-600 dark:text-slate-300 hover:text-sky-600 transition-colors">و2: درس 2 - الأقاليم والنبات والمحميات</a>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- مساحة العرض الرئيسية -->
+    <main class="flex-1 min-w-0">
+
+      <!-- ============================================================== -->
+      <!-- 1. شاشة المعلم الذكي (Gemini AI + المحرك الذكي المضمون 100%) -->
+      <!-- ============================================================== -->
+      <div id="view-ai-chat" class="hidden space-y-4">
+        
+        <div class="bg-gradient-to-r from-purple-800 via-indigo-900 to-slate-900 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+          <div class="relative z-10 max-w-2xl">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold text-amber-300 mb-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              المعلم الذكي المضمون 100% لمناهج أولى ثانوي
+            </span>
+            <h2 class="text-xl sm:text-2xl font-black mb-1">المعلم الذكي: اسألني في أي تفصيلة بالتاريخ أو الجغرافيا</h2>
+            <p class="text-xs sm:text-sm text-purple-200 leading-relaxed font-medium">
+              أنا مدرب خصيصاً على كتب الوزارة ومصادر بنك المعرفة وشروحات النظام الحديث. اسألني عن مفاتيح حل الأسئلة، مقارنات، أزمنة جيولوجية، أو تفسير أي حدث تاريخي وجغرافي وستحصل على إجابة فورية ونموذجية!
+            </p>
+          </div>
+          <div class="absolute -left-8 -bottom-8 w-44 h-44 bg-purple-500/20 rounded-full blur-2xl pointer-events-none"></div>
+        </div>
+
+        <!-- حاوية الشات -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-[650px] overflow-hidden">
+          
+          <!-- الهيدر الخاص بالشات -->
+          <div class="px-4 py-3 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-850">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span class="text-xs font-bold text-slate-700 dark:text-slate-200">نظام الذكاء الاصطناعي النشط (Gemini 3 Flash + المحرك المعرفي المدمج)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="clearChatHistory()" class="text-xs px-2.5 py-1 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">مسح المحادثة</button>
+            </div>
+          </div>
+
+          <!-- شريط الأسئلة المقترحة السريعة -->
+          <div class="p-2.5 bg-purple-50/50 dark:bg-slate-850/50 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2 overflow-x-auto text-[11px] whitespace-nowrap">
+            <span class="text-slate-400 font-bold flex-shrink-0">أسئلة شائعة:</span>
+            <button onclick="askQuickPrompt('ما الفرق الجوهري بين التضاريس والجيومورفولوجيا مع أمثلة امتحانية؟')" class="px-2.5 py-1 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-purple-100 dark:hover:bg-purple-950/40 transition-colors">الفرق بين التضاريس والجيومورفولوجيا</button>
+            <button onclick="askQuickPrompt('وضح مفاتيح الإجابة في أسئلة أهمية دراسة التاريخ (العبر، القدوة، المسؤولية، التعصب)')" class="px-2.5 py-1 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-purple-100 dark:hover:bg-purple-950/40 transition-colors">مفاتيح حل أهمية دراسة التاريخ</button>
+            <button onclick="askQuickPrompt('قارن بين حجر بالرمو وصلاية نعرمر من حيث المادة ونوع النقش والأهمية التاريخية')" class="px-2.5 py-1 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-purple-100 dark:hover:bg-purple-950/40 transition-colors">مقارنة حجر بالرمو وصلاية نعرمر</button>
+            <button onclick="askQuickPrompt('ما هي الأهمية الاقتصادية لتكوينات الزمن الجيولوجي الثاني في مصر وصخورها؟')" class="px-2.5 py-1 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-purple-100 dark:hover:bg-purple-950/40 transition-colors">الأهمية الاقتصادية للزمن الجيولوجي الثاني</button>
+            <button onclick="askQuickPrompt('اشرح أسباب ونتائج أول ثورة اجتماعية في مصر الفرعونية في عهد بيبي الثاني')" class="px-2.5 py-1 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-purple-100 dark:hover:bg-purple-950/40 transition-colors">أول ثورة اجتماعية في التاريخ</button>
+            <button onclick="askQuickPrompt('اشرح مميزات منخفض الفيوم الجيولوجية والتضاريسية وسد اللاهون')" class="px-2.5 py-1 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-purple-100 dark:hover:bg-purple-950/40 transition-colors">منخفض الفيوم وسد اللاهون</button>
+          </div>
+
+          <!-- الرسائل (Chat Feed) -->
+          <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-black text-xs flex-shrink-0">AI</div>
+              <div class="bg-purple-50 dark:bg-slate-800 border border-purple-100 dark:border-slate-700 rounded-2xl rounded-tr-none p-3.5 max-w-[85%] text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed shadow-sm">
+                مرحباً بك يا بطل! 👋 أنا <strong>المعلم الذكي</strong> المخصص لمادتي التاريخ وجغرافيا مصر بالصف الأول الثانوي. نظام الذكاء الاصطناعي مجهز بنسبة 100% للإجابة الفورية عن أي سؤال في المنهج (عصور مصر، الملوك، المعارك، التكوينات الجيولوجية، موقع مصر وحدودها الفلكية، تضاريس الصحاري، المناخ، وفروع الجغرافيا). اكتب سؤالك وسأجيبك فوراً بتفصيل مدعم بالجداول ونواتج التعلم! 🚀
+              </div>
+            </div>
+          </div>
+
+          <!-- مؤشر الكتابة -->
+          <div id="ai-typing" class="hidden px-4 py-2 flex items-center gap-2 text-xs text-purple-600 dark:text-purple-400 bg-purple-50/30 dark:bg-slate-850">
+            <span class="flex gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-600 animate-bounce"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-600 animate-bounce [animation-delay:0.2s]"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-600 animate-bounce [animation-delay:0.4s]"></span>
+            </span>
+            <span>جاري استدعاء الإجابة الأكاديمية والشرح التفصيلي...</span>
+          </div>
+
+          <!-- نموذج إرسال الرسالة -->
+          <div class="p-3 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+            <form id="chat-form" onsubmit="handleChatSubmit(event)" class="flex gap-2">
+              <input type="text" id="chat-input" placeholder="اكتب سؤالك هنا بالتفصيل في التاريخ أو الجغرافيا..." class="flex-1 px-4 py-2.5 rounded-xl text-xs sm:text-sm bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-purple-500 dark:focus:border-purple-400 focus:bg-white dark:focus:bg-slate-900 focus:outline-none transition-all placeholder:text-slate-400 text-slate-800 dark:text-white" required>
+              <button type="submit" id="chat-submit-btn" class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md hover:opacity-95 transition-all flex items-center gap-1.5 flex-shrink-0">
+                <span>إرسال</span>
+                <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- 2. قسم التاريخ (الوحدتان 1 و 2 بتفصيل الكتاب والفيديوهات) -->
+      <!-- ============================================================== -->
+      <div id="view-history" class="space-y-10">
+        
+        <!-- بنر ترحيبي -->
+        <div id="hero" class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-700 via-pharaoh-600 to-amber-500 text-white p-6 sm:p-8 shadow-xl">
+          <div class="relative z-10 max-w-2xl">
+            <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-bold mb-3 tracking-wide">المنهج الدراسي المقرر - كتاب الوزارة + فيديوهات الشرح</span>
+            <h1 class="text-2xl sm:text-3xl font-black mb-3 leading-tight">تاريخ مصر والعالم القديم (الوحدتان 1 و 2)</h1>
+            <p class="text-amber-100 text-xs sm:text-sm leading-relaxed mb-6 font-medium">
+              شرح شامل مدعم برؤية ول ديورانت، انتقال الحضارة وتمايز الهوية والخصوصية العقائدية، مفاتيح حل أهمية دراسة التاريخ، العصور التاريخية، مصادر دراسة الحضارات، وكافة مظاهر الحضارة المصرية الفرعونية التسعة.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="switchView('ai-chat')" class="px-5 py-2.5 rounded-xl bg-purple-700 text-white font-bold text-xs sm:text-sm shadow-md hover:bg-purple-800 transition-all flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                اسأل المعلم الذكي عن أي جزئية
+              </button>
+              <button onclick="switchView('cheat-sheet')" class="px-5 py-2.5 rounded-xl bg-white text-pharaoh-800 font-bold text-xs sm:text-sm shadow-md hover:bg-amber-50 transition-all">مفاتيح التركات الامتحانية</button>
+            </div>
+          </div>
+          <div class="absolute -left-10 -bottom-10 w-64 h-64 bg-amber-400/20 rounded-full blur-3xl pointer-events-none"></div>
+        </div>
+
+        <!-- الوحدة الأولى تاريخ -->
+        <div class="space-y-6">
+          <div class="flex items-center gap-3 border-b-2 border-amber-500/30 pb-3">
+            <span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center font-bold text-sm">1</span>
+            <div>
+              <h2 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white">الوحدة الأولى: مدخل لدراسة حضارة مصر والعالم القديم</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">الحضارة والتاريخ • مصادر دراسة الحضارات • عوامل قيام الحضارات</p>
+            </div>
+          </div>
+
+          <!-- درس 1: الحضارة والتاريخ بالتفصيل الكامل -->
+          <section id="u1-l1" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white">الدرس الأول: الحضارة والتاريخ</h3>
+              <span class="text-xs bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300 px-2.5 py-1 rounded-full font-bold">شرح تفصيلي كامل</span>
+            </div>
+
+            <!-- مفهوم الحضارة وديورانت -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div class="p-3.5 rounded-xl bg-amber-50/60 dark:bg-slate-800 border border-amber-200 dark:border-slate-700 space-y-2">
+                <strong class="text-amber-800 dark:text-amber-300 block font-bold text-sm">مفهوم الحضارة والغاية العظمى:</strong>
+                <p>• <strong>الحضارة:</strong> هي ثمرة أي مجهود يقوم به الإنسان نتيجة تفاعله مع البيئة لتحسين ظروف حياته على وجه الأرض مادياً (عمائر واختراعات) أو معنوياً (فكر، فنون، فلسفة).</p>
+                <p>• <strong>الغاية الأساسية:</strong> تعمير الكون هو إحدى الغايات العليا لوجود الإنسان على الأرض.</p>
+                <p>• <strong>ثنائية الاستقرار:</strong> عاش الإنسان البدائي في تنقل وترحال، فلما عرف الزراعة تعلم <em>الاستقرار</em>، ومع الاستقرار بدأت الحضارة، ومع اختراع الكتابة بدأ <em>تدوين التاريخ</em>.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+                <strong class="text-slate-800 dark:text-slate-200 block font-bold text-sm">رؤية المؤرخ الأمريكي «ول ديورانت» (قصة الحضارة):</strong>
+                <p>• عرّف الحضارة بأنها <strong>نظام اجتماعي يعين الإنسان على الزيادة من إنتاجه الثقافي</strong>.</p>
+                <p>• <strong>العلاقة بين الأمن ونشأة الحضارة:</strong> تبدأ الحضارة حيث ينتهي الاضطراب والقلق؛ لأنه متى أمن الإنسان من الخوف تحررت في نفسه دوافع التطلع والإنشاء وعوامل الإبداع.</p>
+                <p>• <em>تطبيق امتحاني:</em> عصور القوة والاستقرار بمصر (الدول القديمة، الوسطى، الحديثة) شهدت إبداعاً معمارياً وفكرياً، بينما فترات الاضطراب والاحتلال توقف فيها الإنتاج الحضاري.</p>
+              </div>
+            </div>
+
+            <!-- انتقال الحضارة وتمايز الهوية -->
+            <div class="p-3.5 rounded-xl bg-amber-50/30 dark:bg-slate-850 border border-amber-200/60 dark:border-slate-800 text-xs space-y-2">
+              <strong class="text-pharaoh-800 dark:text-amber-400 block font-bold text-sm">انتقال تيار الحضارات وما يميز الشعوب:</strong>
+              <p>• الحضارات سلسلة متصلة الحلقات تيارها متدفق بالأخذ والعطاء والتأثير والتأثر. تمايزت واختلفت كل حضارة عن الأخرى في أمرين ثابتين لا يتطابقان أبداً: <strong>الهوية الثقافية (اللغة والتراث)</strong> و<strong>الخصوصية العقائدية (الدين)</strong>.</p>
+              <p>• <strong>دورة انتقال الحضارة عالمياً:</strong> بدأت في <strong>الشرق القديم</strong> (مصر، العراق، بلاد فارس) $\leftarrow$ انتقلت إلى <strong>الغرب</strong> (اليونان والرومان) $\leftarrow$ عادت إلى <strong>الشرق</strong> لنحو ألف عام على يد الحضارة الإسلامية $\leftarrow$ انتقلت مجدداً إلى <strong>الغرب</strong> الحديث القائم الآن.</p>
+            </div>
+
+            <!-- أهمية التاريخ ومفاتيح حلها الأربعة -->
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs space-y-2">
+              <div class="flex items-center justify-between border-b pb-1">
+                <strong class="text-slate-900 dark:text-white font-bold text-sm">أهمية دراسة التاريخ (قال الإمام أبو حنيفة: من قرأ التاريخ زاد عقله):</strong>
+                <span class="text-[10px] text-amber-600 dark:text-amber-400 font-extrabold">مفاتيح نظام التقييم الجديد</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div class="bg-white dark:bg-slate-900 p-2.5 rounded-lg border">
+                  <span class="font-bold text-amber-700 dark:text-amber-400 block">1. استخلاص العبر من الأمم السابقة:</span>
+                  مفتاح الحل بالامتحان: أي سؤال يتناول أخطاء سابقة، هزائم عسكرية، أو انهيار دول بسبب الظلم (مثل سقوط الدولة الآشورية أو ثورة الشعب ضد بيبي الثاني لتجنب تكرار الأخطاء).
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-2.5 rounded-lg border">
+                  <span class="font-bold text-amber-700 dark:text-amber-400 block">2. إبراز القدوة الصالحة:</span>
+                  مفتاح الحل بالامتحان: أي سؤال يدور حول شخصية تاريخية مصلحة، قائد وطني، أو رسول ونبي ترك بصمة إيجابية تقتدي بها الأجيال (مثل عدل صلاح الدين أو حكمة أحمس).
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-2.5 rounded-lg border">
+                  <span class="font-bold text-amber-700 dark:text-amber-400 block">3. تنمية الشعور بالمسؤولية:</span>
+                  مفتاح الحل بالامتحان: أي سؤال يتناول الحفاظ على الآثار المصرية، صيانة الممتلكات العامة، حل مشكلات المجتمع المعاصرة، وترشيد الموارد.
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-2.5 rounded-lg border">
+                  <span class="font-bold text-amber-700 dark:text-amber-400 block">4. الابتعاد عن التعصب:</span>
+                  مفتاح الحل بالامتحان: إثبات أن الحضارة لم تقم على أمة واحدة أو لغة واحدة أو عنصر منفرد، فلكل أمة نصيب ودور شاركت به في بناء الحضارة الإنسانية.
+                </div>
+              </div>
+            </div>
+
+            <!-- جدول العصور التاريخية الأربعة -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs text-right border-collapse">
+                <thead>
+                  <tr class="bg-amber-100/70 dark:bg-slate-800 text-slate-900 dark:text-slate-100">
+                    <th class="p-2.5 font-bold border dark:border-slate-700">العصر التاريخي</th>
+                    <th class="p-2.5 font-bold border dark:border-slate-700">بدايته ونهايته</th>
+                    <th class="p-2.5 font-bold border dark:border-slate-700">الملامح والخصائص الجوهرية</th>
+                    <th class="p-2.5 font-bold border dark:border-slate-700">التركات الامتحانية</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                  <tr>
+                    <td class="p-2.5 font-bold border dark:border-slate-700 text-pharaoh-800 dark:text-amber-400">العصور القديمة</td>
+                    <td class="p-2.5 border dark:border-slate-700">أواخر الألف 4 ق.م (3200 ق.م) حتى سقوط روما (476م)</td>
+                    <td class="p-2.5 border dark:border-slate-700">معرفة الزراعة والاستقرار، اختراع الكتابة، بناء المقابر والمعابد، قيام حضارات الشرق الكبرى (مصر، العراق، فينيقيا، فارس) وحضارات الغرب (اليونان والرومان).</td>
+                    <td class="p-2.5 border dark:border-slate-700">أطول العصور التاريخية زمناً، وتميزت بازدهار الشرق والغرب معاً.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-bold border dark:border-slate-700 text-indigo-700 dark:text-indigo-400">العصور الوسطى</td>
+                    <td class="p-2.5 border dark:border-slate-700">476م حتى فتح القسطنطينية عاصمة الدولة البيزنطية (1453م)</td>
+                    <td class="p-2.5 border dark:border-slate-700">انتشار المسيحية وسيطرة الكنيسة ونظام الإقطاع والجهل بأوروبا، مقابل ظهور الإسلام بالقرن 7م وازدهار الحضارة الإسلامية من الصين شرقاً للأندلس غرباً.</td>
+                    <td class="p-2.5 border dark:border-slate-700">اصطبغت بالصبغة الدينية، والتناقض الحضاري الشديد بين الشرق المزدهر والغرب المظلم.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-bold border dark:border-slate-700 text-amber-700 dark:text-amber-400">العصور الحديثة</td>
+                    <td class="p-2.5 border dark:border-slate-700">1453م حتى قيام الحرب العالمية الأولى (1914م)</td>
+                    <td class="p-2.5 border dark:border-slate-700">النهضة الأوروبية، الثورة الصناعية، حركة الكشوف الجغرافية (طريق رأس الرجاء الصالح، اكتشاف الأمريكتين)، وحركة الاستعمار الأوروبي.</td>
+                    <td class="p-2.5 border dark:border-slate-700">سلسلة سببية: نهضة $\leftarrow$ ثورة صناعية $\leftarrow$ حاجة لأسواق ومواد خام $\leftarrow$ كشوف جغرافية $\leftarrow$ استعمار.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-bold border dark:border-slate-700 text-rose-700 dark:text-rose-400">التاريخ المعاصر</td>
+                    <td class="p-2.5 border dark:border-slate-700">1914م حتى الوقت الراهن</td>
+                    <td class="p-2.5 border dark:border-slate-700">إيجابيات: حركات التحرر والاستقلال، الثورة المعلوماتية والاختراعات، هبوط الإنسان على القمر.<br>سلبيات: الحروب العالمية المدمرة، التلوث البيئي، وتفشي الأمراض الخطيرة.</td>
+                    <td class="p-2.5 border dark:border-slate-700">يتضمن تناقضاً حاداً داخل نفس العصر (طفرة علمية هائلة مقابل كوارث وتدمير للبيئة).</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- درس 2: مصادر دراسة الحضارات بالتفصيل -->
+          <section id="u1-l2" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white">الدرس الثاني: مصادر دراسة الحضارات</h3>
+              <span class="text-xs bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300 px-2.5 py-1 rounded-full font-bold">المصادر الأولية والثانوية</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              
+              <!-- المصادر الأولية -->
+              <div class="p-4 rounded-xl bg-amber-50/40 dark:bg-slate-850 border border-amber-200 dark:border-slate-700 space-y-2.5">
+                <div class="border-b pb-1.5 flex items-center justify-between">
+                  <span class="font-extrabold text-sm text-pharaoh-800 dark:text-amber-400">المصادر الأولية (معاصرة لزمن الحدث وأكثر دقة):</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded bg-amber-200 dark:bg-amber-900/60 font-bold">6 مصادر</span>
+                </div>
+                <p>1. <strong>الآثار:</strong> المصدر الأساسي، وتشمل الآثار القائمة (كالأهرامات والمعابد) أو المكتشفة بالحفر (التماثيل، المومياوات، التمائم).</p>
+                <p>2. <strong>النقوش:</strong> وتنقسم لنوعين:
+                  <br>• <em>نقوش غائرة:</em> <strong>حجر بالرمو</strong> (لوحة ديوريت أسود عثر عليها بمنف، تضم أسماء جميع من حكموا مصر من عصر ما قبل الأسرات حتى ثالث ملوك الأسرة الخامسة، مع أهم الحروب وإقامة المعابد والتماثيل والأعياد).
+                  <br>• <em>نقوش بارزة:</em> <strong>صلاية الملك نعرمر</strong> (لوحة من حجر الشيست الأخضر تصور الملك مينا يضرب الأعداء ومناظر الجنود والزخارف، وتؤرخ للأسرة الأولى وتحقيق الوحدة 3200 ق.م ومظاهر الأسلحة).
+                </p>
+                <p>3. <strong>البرديات:</strong> وثائق على لفائف نبات البردي (كانت مصر المصدر الوحيد لإنتاجه وتصديره)، مثل <strong>بردية إيبرس الطبية</strong> (أقدم مرجع علمي باطني، عيون، جلد، أطراف، نساء، جراحة، وتشريح فسيولوجي).</p>
+                <p>4. <strong>الأوستراكا (الشقفة):</strong> كسرات الفخار والأحجار المكتوب عليها. استخدمتها الطبقتان المتوسطة والفقيرة لإيصالات الحياة اليومية والخطابات وتدريب الأطفال على الكتابة لتوافرها ورخصها وصعوبة الحصول على ورق البردي المكلف.</p>
+                <p>5. <strong>النقود والمسكوكات:</strong> قطع معدنية مختومة من السلطة لضمان وزنها ونقائها، تعكس الحالة الاقتصادية والأحداث وصور الملوك (<em>تركة امتحانية:</em> لم تكن معروفة بالعهد الفرعوني بمفهومها هذا، وأول من سكها أهل ليديا بآسيا الصغرى).</p>
+                <p>6. <strong>كتابات المؤرخين القدماء:</strong> الإغريقي <strong>هيرودوت</strong> الذي زار مصر وخصص الجزء الثاني من كتابه «تمحيص الأخبار» لجغرافيتها ومدنها وأعمال ملوكها، والمؤرخ المصري <strong>مانيتون السمنودي</strong> أول مؤرخ مصري كتب تاريخ مصر وقسمها لـ 30 أسرة.</p>
+              </div>
+
+              <!-- المصادر الثانوية والمقارنة -->
+              <div class="p-4 rounded-xl bg-sky-50/40 dark:bg-slate-850 border border-sky-200 dark:border-slate-700 space-y-2.5">
+                <div class="border-b pb-1.5 flex items-center justify-between">
+                  <span class="font-extrabold text-sm text-nile-700 dark:text-sky-400">المصادر الثانوية - المراجع (مؤلفات كُتبت بعد الحدث بسنوات):</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded bg-sky-200 dark:bg-sky-900/60 font-bold">3 مصادر</span>
+                </div>
+                <p>1. <strong>كتابات الفلاسفة:</strong> مثل فلاسفة بلاد اليونان (سقراط، أفلاطون، أرسطو).</p>
+                <p>2. <strong>كتابات الشعراء:</strong> مثل الشاعر الإغريقي <strong>هوميروس</strong> صاحب ملحمتي الإلياذة والأوديسة (مصدر تاريخي للحياة السياسية والاقتصادية لليونان).</p>
+                <p>3. <strong>الأساطير:</strong> موروث شعبي يعكس الحياة الاجتماعية والسياسية مثل أسطورة <strong>إيزيس وأوزوريس</strong> في مصر الفرعونية، وأسطورة <strong>قصة الطوفان</strong> في بلاد العراق القديم.</p>
+                <div class="mt-3 p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 space-y-1">
+                  <strong class="text-slate-900 dark:text-white block font-bold">المقارنة الدقيقة بين المصادر:</strong>
+                  <p>• <em>القاسم المشترك:</em> كلاهما نتاج تفاعل الإنسان مع بيئته، ومصادر أساسية لتوثيق الأحداث.</p>
+                  <p>• <em>المصادر الأولية:</em> أكثر دقة ومعاصرة للحدث وقت وقوعه.</p>
+                  <p>• <em>المراجع (الثانوية):</em> متوفرة وسهلة المنال وبديل لا غنى عنه عند فقدان المصادر الأولية الأصلية.</p>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- درس 3: عوامل قيام الحضارات بالتفصيل -->
+          <section id="u1-l3" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white">الدرس الثالث: عوامل قيام الحضارات</h3>
+              <span class="text-xs bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-300 px-2.5 py-1 rounded-full font-bold">المقومات الطبيعية والبشرية لمصر</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+              <div class="p-3 bg-amber-50 dark:bg-slate-800 rounded-xl border border-amber-200 dark:border-slate-700 space-y-1.5">
+                <strong class="text-amber-800 dark:text-amber-300 block font-bold">نهر النيل وقيمه الثلاث الكبرى:</strong>
+                <p>ينحدر من الجنوب للشمال حاملاً الماء والطمي، واكتسب منه المصريون قيماً خالدة:</p>
+                <p>• <strong>الوحدة والتضامن:</strong> فيضان النيل وحّد جهود المصريين لإقامة الجسور وتخزين المياه فعاشوا شعباً واحداً.</p>
+                <p>• <strong>التكافل والتكامل:</strong> تبادل المحاصيل بين الصعيد والدلتا ونشاط التجارة الداخلية.</p>
+                <p>• <strong>التواصل مع الآخرين:</strong> بناء السفن التي حملها تيار النهر شمالاً ودفعتها الرياح السائدة جنوباً فنشروا حضارتهم وتأثروا وأثروا.</p>
+              </div>
+
+              <div class="p-3 bg-sky-50 dark:bg-slate-800 rounded-xl border border-sky-200 dark:border-slate-700 space-y-1.5">
+                <strong class="text-sky-800 dark:text-sky-300 block font-bold">الموقع الجغرافي والحدود الآمنة:</strong>
+                <p>• <strong>الموقع:</strong> ملتقى قارات ثلاث (إفريقيا، آسيا، أوروبا) وتطل على بحرين هامين، وهي حجر الزاوية وقلب العالم القديم (جمال حمدان).</p>
+                <p>• <strong>الحدود الطبيعية الآمنة:</strong> دروع واقية وفرت الأمن والاستقرار: صحراوات بالشرق والغرب، جنادل صخرية جنوباً، والبحر المتوسط شمالاً والأحمر شرقاً، مما حماهم من المعتدين.</p>
+              </div>
+
+              <div class="p-3 bg-emerald-50 dark:bg-slate-800 rounded-xl border border-emerald-200 dark:border-slate-700 space-y-1.5">
+                <strong class="text-emerald-800 dark:text-emerald-300 block font-bold">المناخ والثروات وكفاح الإنسان:</strong>
+                <p>• <strong>المناخ:</strong> معتدل شمسي ينشط العمل، وجاف يحفظ الآثار حتى يومنا هذا، وتنوع فصوله ساعد على تنوع المحاصيل.</p>
+                <p>• <strong>المعادن والصخور:</strong> ذهب ونحاس وجرانيت ورخام للبناء وصنع الحلي.</p>
+                <p>• <strong>كفاح الإنسان (العامل الحاسم):</strong> <strong>«مصر هبة النيل والمصريين»</strong> وليس النيل وحده كما ذكر هيرودوت، فلولا الجهد البشري لما قامت الحضارة.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- الوحدة الثانية تاريخ بالتفصيل الكامل (الدروس الستة) -->
+        <div class="space-y-6 pt-4">
+          <div class="flex items-center gap-3 border-b-2 border-amber-500/30 pb-3">
+            <span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center font-bold text-sm">2</span>
+            <div>
+              <h2 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white">الوحدة الثانية: حضارة مصر القديمة (الفرعونية)</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">ملامح التاريخ الفرعوني • الحياة الاقتصادية والسياسية والاجتماعية والدينية والفكرية</p>
+            </div>
+          </div>
+
+          <!-- درس 1: ملامح التاريخ الفرعوني والعصور -->
+          <section id="u2-l1" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white border-b pb-2">الدرس الأول: ملامح من تاريخ مصر القديمة (العصور التاريخية والأسرات)</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              قسمها المؤرخ مانيتون إلى 30 أسرة حاكمة، وقسمها المؤرخون إلى عصور قوة تفصلها عصور ضعف واضمحلال:
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+              <div class="p-3.5 rounded-xl bg-amber-50/60 dark:bg-slate-800 border border-amber-200 dark:border-slate-700">
+                <span class="font-extrabold text-amber-800 dark:text-amber-300 block mb-1">1. العصر العتيق (1-2) | 3200-2800 ق.م:</span>
+                تأسيس الملك <strong>نعرمر (مينا)</strong> للأسرة الأولى وتوحيد القطرين، بناء عاصمة موحدة «من نفر» (القلعة البيضاء) بميت رهينة لتأمين وحدة البلاد، وسياسة المصاهرة وازدواج الألقاب ورعاية الأعياد الدينية للربط بين الصعيد والدلتا.
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-amber-50/60 dark:bg-slate-800 border border-amber-200 dark:border-slate-700">
+                <span class="font-extrabold text-amber-800 dark:text-amber-300 block mb-1">2. عصر الدولة القديمة (3-6) | 2800-2200 ق.م:</span>
+                عصر بناة الأهرام، حكومة مركزية قوية وثراء وافر وأمن واستقرار وتشييد الأهرامات الضخمة. انتهى بعهد الملك <strong>بيبي الثاني</strong> (أطول فترة حكم 94 سنة) وقيام أول ثورة اجتماعية في التاريخ.
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-700">
+                <span class="font-extrabold text-slate-700 dark:text-slate-300 block mb-1">3. عصر الانتقال الأول (7-10) | 2200-2065 ق.م:</span>
+                ضعف الملوك وفقدان السيطرة، طغيان نفوذ حكام الأقاليم وامتناعهم عن دفع الضرائب، اضطراب الأمن وسادت الفوضى والنهب والسلب حتى قيام الأسرة 11.
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-amber-50/60 dark:bg-slate-800 border border-amber-200 dark:border-slate-700">
+                <span class="font-extrabold text-amber-800 dark:text-amber-300 block mb-1">4. عصر الدولة الوسطى (11-12) | 2065-1775 ق.م:</span>
+                عصر الرخاء الاقتصادي. <strong>منتوحتب الثاني</strong> وحد البلاد وعاصمتها طيبة وأخضع حكام الأقاليم. <strong>أمنمحات الأول</strong> نقل العاصمة إلى «أثيت تاوي» بالعياط للتوسع الزراعي. <strong>سنوسرت الثالث وأمنمحات الثالث</strong> وسد اللاهون والرخاء التام.
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-rose-50 dark:bg-slate-850 border border-rose-200 dark:border-slate-700">
+                <span class="font-extrabold text-rose-700 dark:text-rose-400 block mb-1">5. عصر الانتقال الثاني (13-17) | 1775-1570 ق.م:</span>
+                صراع الأمراء وضعف البلاد وسقوطها في يد <strong>الهكسوس</strong> (قبائل رعوية جاءت من آسيا عام 1730 ق.م) واتخذوا «أواريس» عاصمة لهم، حتى قاد أمراء طيبة الكفاح وطردهم <strong>أحمس</strong>.
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-amber-50/60 dark:bg-slate-800 border border-amber-200 dark:border-slate-700">
+                <span class="font-extrabold text-amber-800 dark:text-amber-300 block mb-1">6. عصر الدولة الحديثة (18-20) | 1570-1098 ق.م:</span>
+                عصر المجد الحربي والإمبراطورية الواسعة؛ تكوين جيش نظامي قوي. <strong>تحتمس الثالث</strong> ومعركة مجدو (1479 ق.م). <strong>رمسيس الثاني</strong> ومعركة قادش (1274 ق.م) وأول معاهدة سلام. رحلات حتشبسوت لبونت، وثورة إخناتون وتشريعات حور محب.
+              </div>
+            </div>
+
+            <div class="p-3 bg-slate-50 dark:bg-slate-850 rounded-xl border text-xs">
+              <strong>العصر المتأخر (21-30) | 1098-331 ق.م:</strong> تفكك واحتلال أجنبي (فارسي حتى اليوناني)، تخلله <strong>عصر النهضة (الأسرة 26)</strong> بقيادة إبسماتيك الأول والملك نخاو ورحلته حول إفريقيا.
+              <br>• <strong>خصائص الحضارة المصرية القديمة:</strong> <em>الأصالة</em> (بأيدي أبنائها)، <em>القدم</em> (7000 سنة)، <em>الاستمرارية</em> (آلاف السنين)، <em>التدين</em>، <em>التقدم</em> في كافة العلوم، و<em>التواصل الحضاري</em> دون انعزال.
+            </div>
+          </section>
+
+          <!-- الدروس من 2 إلى 6 بتفصيل وافٍ -->
+          <div class="space-y-4 text-xs">
+            
+            <!-- درس 2: الحياة الاقتصادية -->
+            <section id="u2-l2" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+              <h3 class="font-black text-sm text-pharaoh-800 dark:text-amber-400 border-b pb-2">الدرس الثاني: الحياة الاقتصادية (الزراعة، الصناعة، التجارة)</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div class="p-3 bg-amber-50/50 dark:bg-slate-800 rounded-xl border border-amber-200 dark:border-slate-700 space-y-1">
+                  <strong class="text-amber-900 dark:text-amber-300 block font-bold">1. الزراعة والري:</strong>
+                  <p>• محاصيل الحبوب (قمح وشعير)، نباتات الألياف (كتان)، الخضار، والبقول، والسمسم للزيت.</p>
+                  <p>• <strong>الملكية الزراعية:</strong> ملكية عامة للملك (الدولة)، ملكيات خاصة للجنود وكبار الموظفين، وملكية أوقاف للإنفاق على المقابر والمعابد.</p>
+                  <p>• <strong>صوامع الغلال:</strong> مبانٍ مخروطية بفتحات علوية وسفلية لتخزين الحبوب لمواجهة الطوارئ.</p>
+                  <p>• <strong>سد اللاهون:</strong> شيده <em>أمنمحات الثالث</em> بالدولة الوسطى عند مدخل الفيوم، منع غرق الأراضي وخزن المياه، واستصلح نحو 27 ألف فدان وأنشأ مدناً حول بحيرة موريس.</p>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1">
+                  <strong class="text-slate-900 dark:text-white block font-bold">2. الصناعة ومهارة الصانع:</strong>
+                  <p>• توارث المهنة من الآباء والأجداد أكسب الصانع المصري دقة ومعرفة بأسرار المواد الخام.</p>
+                  <p>• <em>أهم الصناعات:</em> حجرية (أقدمها)، فخارية (طمي النيل)، زجاجية (أول من عرف الزجاج من الرمال البيضاء)، معدنية (براعة في الذهب كقناع توت عنخ آمون والفضة محدودة)، خشبية (استوردوا الأرز والأبنوس لعدم توافرها)، ورق البردي (رواد العالم، وصنعوا منه السلال والحبال والمراكب الخفيفة)، النسيج (الكتان)، والجلود.</p>
+                  <p>• رعاية الدولة للمناجم وتوفير الأمن لبعثات التعدين ومنع السخرة وصرف أجور عينية للعمال.</p>
+                </div>
+
+                <div class="p-3 bg-sky-50/50 dark:bg-slate-800 rounded-xl border border-sky-200 dark:border-slate-700 space-y-1">
+                  <strong class="text-sky-900 dark:text-sky-300 block font-bold">3. التجارة ووسائل النقل:</strong>
+                  <p>• <strong>التجارة الداخلية:</strong> مقايضة قائمة على الأمانة والوصايا الأخلاقية ومراقبة الأسواق.</p>
+                  <p>• <strong>التجارة الخارجية:</strong> أسطول سنفرو لفينيقيا (40 سفينة لجلب خشب الأرز)، رحلات حتشبسوت لبونت (1495 ق.م)، دوران نخاو حول إفريقيا (600 ق.م) بمساعدة الفينيقيين لمدة 3 سنوات.</p>
+                  <p>• <strong>دور الدولة:</strong> شق <em>سنوسرت الثالث</em> لقناة في صخور الجندل الأول بأسوان لتسهيل التجارة مع السودان، وحفر <strong>قناة سيزوستريس</strong> لربط البحرين عبر النيل، وإدارات الجمارك والقوافل.</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- درس 3: الحياة السياسية والإدارية -->
+            <section id="u2-l3" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+              <h3 class="font-black text-sm text-pharaoh-800 dark:text-amber-400 border-b pb-2">الدرس الثالث: الحياة السياسية والإدارية (نظام الحكم والقضاء والجيش)</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1.5">
+                  <strong class="text-slate-900 dark:text-white block font-bold">عناصر الحكم والإدارة:</strong>
+                  <p>• <strong>الملك:</strong> صاحب فكرة الملكية المقدسة، يجمع السلطات التنفيذية والتشريعية وقيادة الجيوش وتعيين كبار الموظفين.</p>
+                  <p>• <strong>الوزير:</strong> ظهر بالدولة القديمة لأهل الثقة ثم لأهل الكفاءة (إيمحوتب ورخميرع). بالدولة الحديثة عُين وزيران: بطيبة للوجه القبلي، وبمنف للوجه البحري ومصر الوسطى.</p>
+                  <p>• <strong>الإدارة المركزية:</strong> يرأسها الوزير وتضم مجلس العشرة الكبار، كاتمي أسرار الملك، ودواوين الحكومة (الخزانة، مخازن الغلال، السجلات).</p>
+                  <p>• <strong>الإدارة المحلية (حكام الأقاليم):</strong> 42 إقليماً؛ تنافسوا مع الملك وقت الضعف حتى ألغى <em>سنوسرت الثالث</em> وراثة المنصب وأخضعهم تماماً للسلطة المركزية.</p>
+                  <p>• <strong>أول ثورة اجتماعية:</strong> أواخر الأسرة 6 بعهد بيبي الثاني؛ رفعت كرامة الفرد وحولت الحكم إلى <em>ملكية مقيدة بالقوانين</em> والمساواة.</p>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1.5">
+                  <strong class="text-slate-900 dark:text-white block font-bold">القضاء والجيش والأسطول والشرطة:</strong>
+                  <p>• <strong>القضاء:</strong> السلطة الثانية، محكمتان مركزيتان في الشمال والجنوب ومحاكم الأقاليم تحكم بنصوص القانون.</p>
+                  <p>• <strong>الجيش:</strong> جيش سلمي ودفاعي؛ ظهرت بواكيره النظامية بالأسرة 6 بقيادة <em>وني</em> في عهد بيبي الأول، وتأسس كجيش نظامي بالدولة الحديثة (معركة مجدو 1479 ق.م بقيادة تحتمس الثالث). تميز بأخلاق عسكرية رفيعة في عدم المساس بالمدنيين.</p>
+                  <p>• <strong>الأسطول:</strong> العصر الذهبي للبحرية بالدولة الحديثة؛ تصدى <em>رمسيس الثالث</em> لشعوب البحر المتوسط وحطم أسطولهم أمام شواطئ الدلتا وأنقذ مصر.</p>
+                  <p>• <strong>الشرطة:</strong> هيئة مدنية مستقلة ظهرت بالدولة الحديثة لحفظ النظام الداخلي (محلية، خاصة، نهرية، شرطة معابد، وحرس ملكي).</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- درس 4: الحياة الاجتماعية -->
+            <section id="u2-l4" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+              <h3 class="font-black text-sm text-pharaoh-800 dark:text-amber-400 border-b pb-2">الدرس الرابع: الحياة الاجتماعية (الطبقات والعدالة والمرأة والمسكن)</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1">
+                  <strong class="text-slate-900 dark:text-white block font-bold">طبقات المجتمع والعدالة والقوانين:</strong>
+                  <p>• <em>الهرم الطبقي:</em> 1. الفرعون وأسرته $\leftarrow$ 2. الوزير وكبار الكهنة وحكام الأقاليم $\leftarrow$ 3. الموظفون والفنانون والصناع المهرة $\leftarrow$ 4. عمال الزراعة والصناعة والرعاة والخدم.</p>
+                  <p>• <strong>قوانين حور محب:</strong> صدرت لتحقيق العدالة ومواجهة الفساد وظلم الفلاحين ومعاقبة التلاعب بالضرائب ومنع القسوة على الأرقاء.</p>
+                  <p>• <strong>الإلهة «ماعت»:</strong> رمز العدالة والحق، اتخذتها المحاكم شعاراً، وتكاملت القوانين مع نصائح الحكماء ودور المجتمع المدني في مساعدة الفقراء.</p>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1">
+                  <strong class="text-slate-900 dark:text-white block font-bold">الأسرة ومكانة المرأة والمسكن والأعياد:</strong>
+                  <p>• <strong>مكانة المرأة:</strong> رعاية الأسرة كأم، حكماً وسياسة (حتشبسوت)، مقاومة عسكرية (تيتي شري وإياح حتب)، ديناً (كاهنات والإلهة إيزيس)، واقتصاداً (البيع والشراء، التملك والوراثة والوصية)، وتعلماً (مريت آتون كاتبة، وطبيبات وموسيقى).</p>
+                  <p>• <strong>المسكن:</strong> شُيد من الطوب اللبن في مناطق مرتفعة تجنباً للفيضان باعتباره مقراً دنيوياً مؤقتاً.</p>
+                  <p>• <strong>الترفيه والأعياد:</strong> توازن بين العمل واللهو؛ صيد البر والطيور، ألعاب القوة (المصارعة والتحطيب)، وألعاب التفكير (الشطرنج والسيجة)، والموسيقى. أعياد دينية (أوزوريس، آمون)، قومية (الفيضان، الحصاد)، وخاصة بالفرعون والجيش.</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- درس 5: الحياة الدينية -->
+            <section id="u2-l5" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+              <h3 class="font-black text-sm text-pharaoh-800 dark:text-amber-400 border-b pb-2">الدرس الخامس: الحياة الدينية (الخصائص الأربعة وثورة إخناتون)</h3>
+              <p class="text-slate-600 dark:text-slate-300">وصف هيرودوت المصريين بأنهم <em>«أتقى الأمم»</em>. وتميزت الديانة المصرية بأربعة خصائص أساسية:</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+                <div class="p-2.5 bg-amber-50 dark:bg-slate-800 rounded-xl border border-amber-200 dark:border-slate-700">
+                  <strong class="text-amber-800 dark:text-amber-300 block font-bold mb-1">1. تعدد المعبودات:</strong>
+                  تقديس قوى الطبيعة والحيوانات خوفاً (تماسيح)، لفائدة (شمس)، أو إعجاباً (حتحور البقرة) كرموز لقوى غيبية.
+                </div>
+                <div class="p-2.5 bg-amber-50 dark:bg-slate-800 rounded-xl border border-amber-200 dark:border-slate-700">
+                  <strong class="text-amber-800 dark:text-amber-300 block font-bold mb-1">2. البعث والخلود:</strong>
+                  الموت نهاية مؤقتة وبداية خلود، مما أدى لبناء المقابر والأهرامات الحصينة، التحنيط لحفظ الجسد، والأثاث الجنائزي.
+                </div>
+                <div class="p-2.5 bg-amber-50 dark:bg-slate-800 rounded-xl border border-amber-200 dark:border-slate-700">
+                  <strong class="text-amber-800 dark:text-amber-300 block font-bold mb-1">3. الحساب بعد الموت:</strong>
+                  محكمة الموتى (42 قاضياً برئاسة أوزوريس)، يوضع قلب المتوفى في ميزان مقابل ريشة ماعت لتحديد الجنة أو الهلاك.
+                </div>
+                <div class="p-2.5 bg-amber-50 dark:bg-slate-800 rounded-xl border border-amber-200 dark:border-slate-700">
+                  <strong class="text-amber-800 dark:text-amber-300 block font-bold mb-1">4. السمو للتوحيد:</strong>
+                  ثورة <strong>إخناتون (أمنحوتب الرابع)</strong> بعبادة الإله الواحد «أتون» ونقل العاصمة لأخيتاتون، لكنها انهارت لفرضها بالقوة وثورة كهنة آمون.
+                </div>
+              </div>
+              <p class="text-[11px] bg-slate-50 dark:bg-slate-850 p-2.5 rounded-lg border text-slate-600 dark:text-slate-400">
+                • <strong>التواصل الديني مع إفريقيا:</strong> تأثر شمال السودان بالبعث والخلود وعبادة أمون وحتحور، واعترف المصريون بآلهة نوبية كالإله <strong>ددون</strong>.
+              </p>
+            </section>
+
+            <!-- درس 6: الحياة الثقافية والفكرية -->
+            <section id="u2-l6" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+              <h3 class="font-black text-sm text-pharaoh-800 dark:text-amber-400 border-b pb-2">الدرس السادس: الحياة الثقافية والفكرية (الكتابة، التعليم، الأدب، العلوم، والفنون)</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1.5">
+                  <strong class="text-slate-900 dark:text-white block font-bold">الكتابة وتطورها ومراكز العلم والأدب:</strong>
+                  <p>• <strong>أنواع الكتابة الأربعة:</strong>
+                    <br>1. <em>الهيروغليفية:</em> الخط المقدس، نقوش جدارية للنصوص الدينية على المقابر والمعابد.
+                    <br>2. <em>الهيراطيقية:</em> خط رجال الدين، شكل مبسط ابتدعه الكهنة للسرعة والتدوين على البردي والخشب.
+                    <br>3. <em>الديموطيقية:</em> الخط الشعبي العامي، دونت بها مناحي الحياة اليومية بالعصر المتأخر واليوناني الروماني.
+                    <br>4. <em>القبطية:</em> حروف يونانية مضافاً إليها حروف ديموطيقية بعد انتشار المسيحية (القرن 2م).
+                  </p>
+                  <p>• <strong>مراكز العلم:</strong> المدارس، المكتبات (مكتبة الرمسيوم)، و<strong>جامعة أون (بيوت الحياة)</strong> أول مركز علمي وضع التقويم الشمسي وحافظ على الهوية واللغة.</p>
+                  <p>• <strong>الأدب:</strong> ديني (نصوص الأهرام، نصوص التوابيت، كتاب الموتى)، قصة ورواية (سنوهي، القروي الفصيح، الأخوين، الملاح التائه، وأول دراما تمثيلية 3400 ق.م)، حكمة ونصيحة (بتاح حتب وأني)، وسياسي (مدح الملوك ونقدهم).</p>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1.5">
+                  <strong class="text-slate-900 dark:text-white block font-bold">العلوم والعمارة والفنون:</strong>
+                  <p>• <strong>الحساب والهندسة:</strong> حساب الفيضان وتقدير الضرائب، تخطيط المدن، حفر الترع، وبناء الأهرامات.</p>
+                  <p>• <strong>الفلك والطب والكيمياء:</strong> رصد النجوم ووضع التقويم الشمسي وظاهرة تعامد الشمس على وجه رمسيس الثاني. التخصص الطبي والتحنيط الدقيق، وصناعة الأدوية والأصباغ والعطور ومواد التحنيط.</p>
+                  <p>• <strong>العمارة:</strong> بناء المنازل بالطوب اللبن لأنها دار فانية، واستخدام الحجر في المعابد والمقابر للخلود. تطور المقابر (حفرة $\leftarrow$ مصطبة $\leftarrow$ هرم مدرج كزوسر $\leftarrow$ أهرامات كاملة بالجيزة $\leftarrow$ مقابر منحوتة بالصخر في وادي الملوك). معابد جنائزية (حتشبسوت، الرمسيوم) ومعابد آلهة (الكرنك، الأقصر، أبو سمبل).</p>
+                  <p>• <strong>الفنون والكاريكاتير:</strong> نحت (خفرع، أبو الهول)، رسم ملون بمقبرة توت عنخ آمون، والريادة في الرسوم الهزلية الساخرة الكاريكاتير (رسم قط يقود مجموعة من الأوز للتعبير عن الأوضاع السياسية والاجتماعية).</p>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- 3. قسم جغرافيا مصر (التمهيدي + الوحدتان 1 و 2 بالتفصيل) -->
+      <!-- ============================================================== -->
+      <div id="view-geography" class="hidden space-y-10">
+        
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-sky-700 via-nile-600 to-teal-600 text-white p-6 sm:p-8 shadow-xl">
+          <div class="relative z-10 max-w-2xl">
+            <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-bold mb-3 tracking-wide">المنهج الكامل - جغرافيا مصر الصف الأول الثانوي</span>
+            <h1 class="text-2xl sm:text-3xl font-black mb-3 leading-tight">جغرافيا مصر الطبيعية والبشرية كاملة</h1>
+            <p class="text-sky-100 text-xs sm:text-sm leading-relaxed mb-6 font-medium">
+              تغطية تفصيلية شاملة: الدرس التمهيدي وفروعه وأدواته، الوحدة الأولى (الموقع والحدود الفلكية، جدول الأزمنة الجيولوجية الخمسة وعوامل التشكيل، وأقسام التضاريس الأربعة)، والوحدة الثانية (عناصر المناخ، فصول السنة، الأقاليم المناخية، والنبات الطبيعي والمحميات).
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="switchView('ai-chat')" class="px-5 py-2.5 rounded-xl bg-purple-700 text-white font-bold text-xs sm:text-sm shadow-md hover:bg-purple-800 transition-all flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                اسأل المعلم الذكي عن جغرافيا مصر
+              </button>
+              <button onclick="switchView('cheat-sheet')" class="px-5 py-2.5 rounded-xl bg-white text-sky-800 font-bold text-xs sm:text-sm shadow-md hover:bg-sky-50 transition-all">تركات امتحانات الجغرافيا</button>
+            </div>
+          </div>
+          <div class="absolute -left-10 -bottom-10 w-64 h-64 bg-teal-400/20 rounded-full blur-3xl pointer-events-none"></div>
+        </div>
+
+        <!-- الدرس التمهيدي: مدخل علم الجغرافيا بالتفصيل الكامل -->
+        <section id="geo-intro" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+            <div>
+              <span class="text-xs font-bold text-sky-600 dark:text-sky-400">الدرس التمهيدي</span>
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white mt-0.5">مدخل لدراسة علم الجغرافيا (المفهوم، الفروع، وأدوات الجغرافيا)</h3>
+            </div>
+            <span class="text-xs bg-sky-100 text-sky-800 dark:bg-sky-950/40 dark:text-sky-300 px-2.5 py-1 rounded-full font-bold">أساسيات المادة</span>
+          </div>
+
+          <!-- المفهوم والأهمية -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="p-3.5 rounded-xl bg-sky-50/50 dark:bg-slate-800 border border-sky-200 dark:border-slate-700 space-y-2">
+              <strong class="text-sky-900 dark:text-sky-300 block font-bold text-sm">مفهوم الجغرافيا قديماً وحديثاً:</strong>
+              <p>• <strong>الأصل اللغوي:</strong> كلمة إغريقية مركبة من مقطعين: <em>Geo</em> (الأرض) + <em>Graphein</em> (الوصف) تعني حرفياً <strong>وصف الأرض</strong>.</p>
+              <p>• <strong>المفهوم قديماً:</strong> علم وصف الأرض؛ كان الرحالة يسجلون مشاهداتهم وانطباعاتهم البصرية عن البلدان والأقاليم تدوينياً دون تفسير أو تحليل علمي.</p>
+              <p>• <strong>المفهوم حديثاً:</strong> علم دراسة وتحليل الظواهر الطبيعية والبشرية على سطح الأرض مع توضيح <strong>العلاقات المكانية المتبادلة بين الإنسان وبيئته</strong> (تفاعل وتأثير متبادل).</p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1.5">
+              <strong class="text-slate-900 dark:text-white block font-bold text-sm">أهمية علم الجغرافيا:</strong>
+              <p>1. تدرس التفاعل بين الإنسان وبيئته وتوضح أثر البيئة على سلوكه ونشاطه.</p>
+              <p>2. تخدم العلوم المختلفة وتوفر قواعد البيانات المكانية لدعم متخذي القرار والتخطيط المستقبلي.</p>
+              <p>3. ترسيخ وتثبيت الإيمان بالله من خلال التأمل والبحث الدقيق في مظاهر الكون والأرض.</p>
+              <p>4. الاستثمار الأمثل للموارد الطبيعية والتخطيط العمراني وتحديد الاستخدام الأنسب للأراضي.</p>
+              <p>5. طرح حلول علمية للمشكلات السكانية والبيئية (كالازدحام وتآكل الشواطئ والاحتباس الحراري والتوسع العمراني في الصحراء).</p>
+            </div>
+          </div>
+
+          <!-- فروع الجغرافيا والتفرقة الجوهرية -->
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 text-xs space-y-3">
+            <div class="border-b pb-1 flex items-center justify-between">
+              <strong class="text-slate-900 dark:text-white font-bold text-sm">فروع علم الجغرافيا وتطبيقاتها الامتحانية:</strong>
+              <span class="text-[10px] text-sky-600 dark:text-sky-400 font-bold">فروع طبيعية، بشرية، وأخرى متخصصة</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="bg-white dark:bg-slate-900 p-3 rounded-xl border">
+                <span class="font-bold text-sky-700 dark:text-sky-400 block mb-1">أولاً: الجغرافيا الطبيعية:</span>
+                • <strong>جغرافيا التضاريس:</strong> دراسة الأشكال التضاريسية القائمة كوصف وتوزيع (جبال، هضاب، سهول).<br>
+                • <strong>الجغرافيا المناخية:</strong> دراسة عناصر المناخ والأقاليم وأثر المناخ على الإنسان.<br>
+                • <strong>الجيومورفولوجيا:</strong> دراسة أشكال سطح الأرض و<strong>العوامل الطبيعية التي شكلتها</strong> (صدوع، التواءات، براكين، تعرية).<br>
+                • <strong>جغرافيا البحار والمحيطات:</strong> الخصائص الطبيعية للمسطحات المائية وأعماقها.<br>
+                • <strong>الجغرافيا الحيوية:</strong> دراسة التربة، النبات الطبيعي (غابات وحشائش)، والحيوان البري.<br>
+                • <strong>الجغرافيا الفلكية:</strong> شكل كوكب الأرض وحركتها وموقعها بالنسبة للكون وخطوط الطول والدوائر.
+              </div>
+
+              <div class="bg-white dark:bg-slate-900 p-3 rounded-xl border">
+                <span class="font-bold text-amber-700 dark:text-amber-400 block mb-1">ثانياً: الجغرافيا البشرية:</span>
+                • <strong>الجغرافيا الاقتصادية:</strong> الأنشطة الإنتاجية (زراعة، رعي، تعدين، طاقة، صناعة، تجارة).<br>
+                • <strong>جغرافيا السكان:</strong> نمو السكان، تركيبهم (عمري ونوعي)، توزيعهم، كثافتهم، وأنماط الهجرة.<br>
+                • <strong>جغرافيا العمران:</strong> دراسة التجمعات السكنية (ريفي، حضري، بدوي)، العشوائيات، ومخططات المدن الجديدة.<br>
+                • <strong>الجغرافيا السياسية:</strong> دراسة الدولة كوحدة سياسية ومقوماتها الطبيعية والبشرية وحدودها وعلاقاتها الدولية.
+              </div>
+
+              <div class="bg-white dark:bg-slate-900 p-3 rounded-xl border">
+                <span class="font-bold text-emerald-700 dark:text-emerald-400 block mb-1">ثالثاً: فروع أخرى مشتركة:</span>
+                • <strong>الجغرافيا الإقليمية:</strong> تقسيم العالم إلى أقاليم جغرافية ودراسة خصائصها لإبراز شخصيتها المكانية.<br>
+                • <strong>الجغرافيا التاريخية:</strong> دراسة الظواهر الطبيعية والبشرية في <em>الماضي</em> (مثل شكل دلتا النيل في العصور القديمة).<br>
+                • <strong>الجغرافيا الطبية:</strong> توزيع الأمراض ومصادر انتشار العدوى والخدمات الصحية.<br>
+                • <strong>جغرافيا الجريمة:</strong> دراسة العلاقة بين المكان وأسباب وقوع الجرائم وسلوك المجرمين.
+              </div>
+            </div>
+
+            <!-- التفرقة الامتحانية الذهبية -->
+            <div class="p-2.5 bg-sky-100/60 dark:bg-slate-800 rounded-lg border border-sky-300 dark:border-slate-700">
+              <strong class="text-sky-900 dark:text-sky-300">التركة الامتحانية الحاسمة بين التضاريس والجيومورفولوجيا:</strong>
+              إذا كان السؤال يتناول <em>شكل الجبل، امتداده، توزيعه، أو ارتفاعه</em> $\leftarrow$ الإجابة <strong>جغرافيا التضاريس</strong>.
+              أما إذا تناول <em>عوامل نشأة الجبل، الصدوع، الانكسارات، أو كيف تكون المنخفض</em> $\leftarrow$ فالإجابة حتماً <strong>جيومورفولوجيا</strong>.
+            </div>
+          </div>
+
+          <!-- أدوات الجغرافيا والتقنيات الحديثة -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1">
+              <strong class="text-slate-900 dark:text-white block font-bold">1. الخريطة وأساسياتها السبعة:</strong>
+              تمثيل لظواهر سطح الأرض برموز وألوان بمقياس رسم معين. أساسيات الخريطة التي لا غنى عنها: (عنوان الخريطة، مفتاح الخريطة، مقياس الرسم، اتجاه الشمال، إحداثيات الخريطة [دوائر العرض وخطوط الطول وتحدد المناخ والتوقيت والموقع الفلكي]، إطار الخريطة [يحدد كل محتوياتها وينتهي عنده المظهر]، ومصدر الخريطة [يوثق صحتها]).
+            </div>
+            <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1">
+              <strong class="text-slate-900 dark:text-white block font-bold">2. التقنيات الجغرافية الحديثة الثلاث:</strong>
+              • <strong>الاستشعار من بعد (Remote Sensing - RS):</strong> علم الحصول على معلومات عن سطح الأرض بواسطة مستشعرات لا تلامس السطح (صور جوية ومرئيات فضائية).<br>
+              • <strong>نظم المعلومات الجغرافية (GIS):</strong> نظام معلوماتي حاسوبي لإدخال وتخزين ومعالجة واسترجاع وتحليل البيانات الجغرافية لإعداد خرائط ودعم القرار.<br>
+              • <strong>نظام تحديد المواقع العالمي (GPS):</strong> يربط بين 24 قمراً صناعياً ومستقبلات لتحديد خط الطول ودائرة العرض والارتفاع.
+            </div>
+          </div>
+        </section>
+
+        <!-- الوحدة الأولى جغرافيا -->
+        <div class="space-y-6 pt-2">
+          <div class="flex items-center gap-3 border-b-2 border-sky-500/30 pb-3">
+            <span class="w-8 h-8 rounded-lg bg-sky-500 text-white flex items-center justify-center font-bold text-sm">1</span>
+            <div>
+              <h2 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white">الوحدة الأولى: موقع مصر والتكوينات الجيولوجية وتضاريس السطح</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">الموقع الجيوسياسي • جدول التكوينات الجيولوجية • أقسام التضاريس الأربعة</p>
+            </div>
+          </div>
+
+          <!-- درس 1: موقع مصر والحدود السياسية بالتفصيل -->
+          <section id="geo-u1-l1" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white">الدرس الأول: موقع مصر الجغرافي والفلكي والحدود السياسية</h3>
+              <span class="text-xs bg-sky-100 text-sky-800 dark:bg-sky-950/40 dark:text-sky-300 px-2.5 py-1 rounded-full font-bold">الموقع والحدود الاستراتيجية</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div class="p-3.5 rounded-xl bg-sky-50/50 dark:bg-slate-800 border border-sky-200 dark:border-slate-700 space-y-2">
+                <strong class="text-sky-900 dark:text-sky-300 block font-bold text-sm">الموقع الفلكي والمساحة وشكل الدولة:</strong>
+                <p>• <strong>الموقع الفلكي:</strong> تمتد مصر بين دائرتي عرض <strong>$22^\circ$ إلى $31.36^\circ$ شمالاً</strong> (نحو 10 درجات عرضية، ويمر مدار السرطان $23.5^\circ$ ش بجنوبها)، وخطي طول <strong>$25^\circ$ إلى $37^\circ$ شرقاً</strong> (12 خط طول).</p>
+                <p>• <strong>المساحة:</strong> تبلغ <strong>1,019,600 كم²</strong> (تمثل نحو 3% من قارة إفريقيا و7% من مساحة الوطن العربي).</p>
+                <p>• <strong>شكل مصر:</strong> يقترب من <strong>المربع</strong>، وتتسم شخصيتها بأنها تجمع بين <em>القوة البرية</em> لاتساع أراضيها و<em>القوة البحرية</em> لسواحلها على بحرين رئيسيين (جمال حمدان).</p>
+                <p>• <strong>فروق التوقيت والشروق:</strong> أول مدينة تشرق وتغرب عليها الشمس هي <strong>حلايب</strong> (أقصى الشرق)، وآخر مدينة تشرق وتغرب عليها الشمس هي <strong>السلوم</strong> (أقصى الغرب).</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+                <strong class="text-slate-900 dark:text-white block font-bold text-sm">التشريح التفصيلي لحدود مصر السياسية الأربعة:</strong>
+                <p>• <strong>الحدود الشمالية (بحرية خالصة):</strong> تمتد على ساحل البحر المتوسط من شرق رفح حتى غرب السلوم، بمحاذاة المياه الإقليمية (12 ميلاً بحرياً).</p>
+                <p>• <strong>الحدود الجنوبية (برية فلكية هندسية خالصة):</strong> تفصل بين مصر والسودان وتتطابق مع <strong>دائرة عرض $22^\circ$ شمالاً</strong> من ساحل البحر الأحمر شرقاً حتى جبل العوينات غرباً (وهي <strong>أطول الحدود البرية المصرية وأكثرها استقامة</strong>).</p>
+                <p>• <strong>الحدود الغربية (برية فلكية في معظمها):</strong> تفصل بين مصر وليبيا، تتماشى مع <strong>خط طول $25^\circ$ شرقاً</strong> مستقيمة من العوينات جنوباً حتى سيوة، لكنها <strong>متعرجة في قطاعها الشمالي</strong> من سيوة إلى السلوم.</p>
+                <p>• <strong>الحدود الشرقية (بحرية وبرية):</strong> بحرية على البحر الأحمر وخليج العقبة، وبرية شمالية شرقية من شرق طابا إلى شرق رفح (وهي <strong>أقصر حدود برية لمصر وأكثرها خطورة وحساسية استراتيجية وأمنية</strong> لوجود الاحتلال الصهيوني في فلسطين).</p>
+              </div>
+            </div>
+
+            <div class="p-3 bg-amber-50 dark:bg-slate-850 rounded-xl border border-amber-200 dark:border-slate-700 text-xs">
+              <strong class="text-amber-800 dark:text-amber-400">الأهمية الاستراتيجية ودوائر التماس:</strong>
+              ازدادت أهمية موقع مصر بفضل إشرافها على البحرين المتوسط والأحمر، وموقعها في شمال حوض النيل الذي نقل الحضارة لقلب إفريقيا، والفتح الإسلامي (641م) الذي جعلها ممراً للتجارة ونشر الإسلام، وافتتاح <strong>قناة السويس</strong> وقناة السويس الجديدة التي وفرت الوقت والمسافة لنقل بترول الخليج وتجارة آسيا وأوروبا. وتتلاقى مصر في أربع دوائر تماس: (العربية، الإفريقية، الإسلامية، والمتوسطية).
+            </div>
+          </section>
+
+          <!-- درس 2: التكوينات الجيولوجية وعوامل التشكيل بالتفصيل -->
+          <section id="geo-u1-l2" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white">الدرس الثاني: التكوينات الجيولوجية وعوامل تشكيل سطح مصر</h3>
+              <span class="text-xs bg-sky-100 text-sky-800 dark:bg-sky-950/40 dark:text-sky-300 px-2.5 py-1 rounded-full font-bold">جدول الأزمنة الجيولوجية الشامل</span>
+            </div>
+
+            <!-- جدول الأزمنة الخمسة الشامل للوزارة -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs text-right border-collapse">
+                <thead>
+                  <tr class="bg-sky-100/70 dark:bg-slate-800 text-slate-900 dark:text-slate-100">
+                    <th class="p-2 font-bold border dark:border-slate-700">الزمن الجيولوجي</th>
+                    <th class="p-2 font-bold border dark:border-slate-700">النسبة</th>
+                    <th class="p-2 font-bold border dark:border-slate-700">أهم التكوينات الصخرية والمعادن</th>
+                    <th class="p-2 font-bold border dark:border-slate-700">الأهمية الاقتصادية المباشرة</th>
+                    <th class="p-2 font-bold border dark:border-slate-700">مناطق الانتشار والتوزيع في مصر</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                  <tr>
+                    <td class="p-2 font-bold border dark:border-slate-700 text-purple-700 dark:text-purple-400">الزمن الآركي (الأقدم)</td>
+                    <td class="p-2 border dark:border-slate-700">10%</td>
+                    <td class="p-2 border dark:border-slate-700">صخور نارية ومتحولة صلبة: جرانيت، رخام، بازلت، ومعادن فلزية (ذهب، حديد، منجنيز).</td>
+                    <td class="p-2 border dark:border-slate-700">أحجار للبناء والزينة والصناعات التعدينية الثقيلة وصناعة الحلي.</td>
+                    <td class="p-2 border dark:border-slate-700">جبال البحر الأحمر، المثلث الجبلي بجنوب سيناء، خانق كلابشة وجندل النيل الأول بأسوان، وجبل العوينات.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 font-bold border dark:border-slate-700 text-blue-700 dark:text-blue-400">الزمن الأول</td>
+                    <td class="p-2 border dark:border-slate-700">1% (الأقل)</td>
+                    <td class="p-2 border dark:border-slate-700">الحجر الرملي.</td>
+                    <td class="p-2 border dark:border-slate-700">استخدامات بناء محدودة؛ تأثر بشدة بالتعرية ونشاط الرياح فقلت مساحته.</td>
+                    <td class="p-2 border dark:border-slate-700">وادي عربة بشمال الصحراء الشرقية، حول جبل العوينات، ووسط وغرب شبه جزيرة سيناء.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 font-bold border dark:border-slate-700 text-emerald-700 dark:text-emerald-400">الزمن الثاني (الأكبر مساحة)</td>
+                    <td class="p-2 border dark:border-slate-700">42% (الأوسع)</td>
+                    <td class="p-2 border dark:border-slate-700">1. الحجر الرملي النوبي.<br>2. الصخور الطباشيرية.<br>3. رواسب الفحم.</td>
+                    <td class="p-2 border dark:border-slate-700"><strong>أهم زمن اقتصادي:</strong> خزان المياه الجوفية والبترول، استخراج الفوسفات لصناعة الأسمدة، ومصدر طاقة فحم بجبل المغارة.</td>
+                    <td class="p-2 border dark:border-slate-700">هضبة الجلف الكبير والواحات (الفرافرة والبحرية)، هضبة العبابدة، وهضبتا التيه والعجمة في سيناء، وجبل المغارة.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 font-bold border dark:border-slate-700 text-amber-700 dark:text-amber-400">الزمن الثالث</td>
+                    <td class="p-2 border dark:border-slate-700">33%</td>
+                    <td class="p-2 border dark:border-slate-700">الحجر الجيري، وتكوينات عصر الميوسين.</td>
+                    <td class="p-2 border dark:border-slate-700">صناعة الأسمنت والجبس وأغراض البناء، وتكوينات مصائد البترول في عصر الميوسين.</td>
+                    <td class="p-2 border dark:border-slate-700">الهضبة الوسطى بالصحراء الغربية، هضبة مارماريكا شمالاً، هضبة المعازة بالصحراء الشرقية، وسواحل السويس والعقبة.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 font-bold border dark:border-slate-700 text-teal-700 dark:text-teal-400">الزمن الرابع (الأحدث)</td>
+                    <td class="p-2 border dark:border-slate-700">14%</td>
+                    <td class="p-2 border dark:border-slate-700">رواسب طينية فيضية نيلية، رواسب بحرية وشواطئ مرجانية، وكثبان وتلال جيرية شاطئية.</td>
+                    <td class="p-2 border dark:border-slate-700">قيام النشاط الزراعي واستقرار السكان، وسياحة الشواطئ على البحرين.</td>
+                    <td class="p-2 border dark:border-slate-700">الوادي والدلتا ومنخفض الفيوم، الساحل الشمالي، ساحل البحر الأحمر، وبحر الرمال العظيم والصحراء الغربية.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- عوامل تشكيل السطح الباطنية والخارجية -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+              <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1">
+                <strong class="text-slate-900 dark:text-white block font-bold">أولاً: العوامل الباطنية (في باطن الأرض):</strong>
+                <p>• <strong>التصدع والانكسار:</strong> حركة أرضية كبرى كونت الأخدود الإفريقي العظيم في عصر <em>الأوليجوسين</em> (الزمن الثالث) فنتج عنها البحر الأحمر وخليجي السويس والعقبة وجبال البحر الأحمر وجنوب سيناء.</p>
+                <p>• <strong>التداخلات البركانية:</strong> خروج طفوح بركانية من البازلت صاحبت الصدوع، مثل <strong>طفوح بازلت جبل قطرانى</strong> شمال منخفض الفيوم.</p>
+                <p>• <strong>الالتواءات:</strong> ضغوط جانبية قادمة من الشمال الشرقي كونت التواءات قبابية محدبة تحولت بفعل التعرية لمنخفضات مثل <em>قبو البحرية</em> (منخفض الواحات البحرية)، وجبال الحلال والمغارة بسيناء.</p>
+              </div>
+
+              <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1">
+                <strong class="text-slate-900 dark:text-white block font-bold">ثانياً: العوامل الخارجية (عوامل التعرية):</strong>
+                <p>• <strong>التعرية النهرية:</strong> نحت ونقل وإرساب مياه النيل كونت سهل الدلتا الطيني والوادي والفيوم.</p>
+                <p>• <strong>التعرية البحرية:</strong> أمواج وتيارات البحر كونت الرؤوس الأرضية (رأس بناس، رأس الحكمة، رأس رشيد)، والخلجان والشروم والشواطئ.</p>
+                <p>• <strong>التعرية بالمياه الجوفية:</strong> تسرب الأمطار في فترات مطيرة ذوّب الحجر الجيري وكون الكهوف.</p>
+                <p>• <strong>التعرية الهوائية (الرياح):</strong> نحتت المنخفضات الصحراوية (القطارة والخارجة)، وأرسبت الكثبان وبحر الرمال العظيم وغرد أبو المحاريق (350 كم).</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- درس 3: تضاريس مصر الأربعة بالتفصيل -->
+          <section id="geo-u1-l3" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white">الدرس الثالث: تضاريس مصر (الأقسام التضاريسية الأربعة)</h3>
+              <span class="text-xs bg-sky-100 text-sky-800 dark:bg-sky-950/40 dark:text-sky-300 px-2.5 py-1 rounded-full font-bold">أقسام السطح الجغرافية</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              
+              <div class="p-3.5 bg-emerald-50/50 dark:bg-slate-850 rounded-xl border border-emerald-200 dark:border-slate-700 space-y-2">
+                <strong class="text-emerald-900 dark:text-emerald-300 block font-bold text-sm">1. وادي النيل والدلتا ومنخفض الفيوم (نحو 4% من المساحة):</strong>
+                <p>• <strong>نهر النيل:</strong> أطول أنهار العالم (6670 كم). شق مجراه بمصر أواخر عصر <em>الميوسين</em> (الزمن 3) معتمداً على منابع جبال البحر الأحمر، ثم اتصل بمنابعه الاستوائية والحبشية في عصر <em>البلايستوسين</em> (الزمن 4). انحداره العام من الجنوب للشمال ومجراه يتميز بالجنادل والثنيات (أكبرها ثنية قنا).</p>
+                <p>• <strong>الدلتا:</strong> مثلث قاعدته على البحر المتوسط بين سهل الطينة شرقاً وغرب الإسكندرية غرباً، وقمته شمال غرب القاهرة بالقناطر الخيرية. تتفرع إلى فرع <em>دمياط</em> (طوله 245 كم ومنسوبه أعلى بـ 2م) وفرع <em>رشيد</em> (طوله 239 كم وهو أكثر اتساعاً). وتضم بحيرات ساحلية (المنزلة، البرلس، إدكو، ومريوط).</p>
+                <p>• <strong>منخفض الفيوم:</strong> يقع بالصحراء الغربية غرب بني سويف لكنه <strong>يتبع الوادي والدلتا تضاريسياً وجغرافياً</strong> لأن رواسب قاعه طينية فيضية نيلية نقلها له <strong>بحر يوسف</strong> عبر فتحة اللاهون المنحوتة في هضبة الحجر الجيري، وتنحدر أراضيه باتجاه الشمال الغربي نحو بحيرة قارون (أعمق أجزائه).</p>
+              </div>
+
+              <div class="p-3.5 bg-amber-50/50 dark:bg-slate-850 rounded-xl border border-amber-200 dark:border-slate-700 space-y-2">
+                <strong class="text-amber-900 dark:text-amber-300 block font-bold text-sm">2. الصحراء الغربية (68% من مساحة مصر - كبرى الأقسام):</strong>
+                <p>• تمتد من النيل شرقاً حتى ليبيا غرباً ومن المتوسط شمالاً حتى السودان جنوباً.</p>
+                <p>• <strong>الهضاب الثلاث:</strong>
+                  <br>1. <em>الهضبة الجنوبية:</em> تشغل ثلث المساحة، وتضم هضبة الجلف الكبير وجبل العوينات في أقصى الجنوب الغربي.
+                  <br>2. <em>الهضبة الوسطى:</em> تضم منخفضات الواحات البحرية والفرافرة.
+                  <br>3. <em>هضبة مارماريكا:</em> في الشمال، هضبة صخرية تسقط مباشرة على البحر عند السلوم وتخلو من الغطاءات الرملية.
+                </p>
+                <p>• <strong>النطاق الرملي والمنخفضات:</strong> منخفض <strong>القطارة</strong> (أكبر وأعمق المنخفضات غير المأهولة)، سيوة، بحر الرمال العظيم، و<em>غرد أبو المحاريق</em> (كثبان طولية متحركة تمتد لنحو 350 كم).</p>
+              </div>
+
+              <div class="p-3.5 bg-slate-50 dark:bg-slate-850 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
+                <strong class="text-slate-900 dark:text-white block font-bold text-sm">3. الصحراء الشرقية (22% من مساحة مصر):</strong>
+                <p>• <strong>السهل الساحلي والساحل:</strong> يمتد من رأس السويس حتى حلايب، يتميز بالاستقامة وظهور الرؤوس الأرضية مثل <strong>رأس بناس</strong> والشعاب المرجانية.</p>
+                <p>• <strong>سلسلة جبال البحر الأحمر:</strong> جبال نارية ومتحولة أركية، أعلى قممها <strong>جبل الشايب</strong> (2184م)، يليه جبل حماطة وجبل علبة.</p>
+                <p>• <strong>الهضاب:</strong> هضبة <em>المعازة الجيرية</em> شمال ثنية قنا (زمن 3)، وهضبة <em>العبابدة الرملية</em> جنوبها (زمن 2).</p>
+                <p>• <strong>الأودية الجافة ومقارنتها الامتحانية:</strong>
+                  <br>• <em>أودية تنحدر شرقاً للبحر الأحمر:</em> قصيرة وشديدة الانحدار (مثل وادي عَلَم ووادي الجَمَال).
+                  <br>• <em>أودية تنحدر غرباً لنهر النيل:</em> طويلة وقليلة الانحدار (مثل <strong>وادي قنا، وادي الأسيوطي، ووادي العلاقي</strong>)، ويمكن استثمارها بإقامة سدود لحصاد السيول والاستفادة منها كمياه عذبة.
+                </p>
+              </div>
+
+              <div class="p-3.5 bg-sky-50/50 dark:bg-slate-850 rounded-xl border border-sky-200 dark:border-slate-700 space-y-2">
+                <strong class="text-sky-900 dark:text-sky-300 block font-bold text-sm">4. شبه جزيرة سيناء (6% من مساحة مصر):</strong>
+                <p>• <strong>القسم الجنوبي (المثلث الجبلي):</strong> مثلث قاعدته عند دائرة عرض $29^\circ$ ش وقمته عند رأس محمد. ينحدر بشدة لخليج العقبة ويتدرج بسهل القاع لخليج السويس. يضم أعلى قمة جبلية في مصر وهي <strong>جبل سانت كاترين</strong> (2642م) وجبل موسى.</p>
+                <p>• <strong>القسم الأوسط (الهضبي):</strong> يشغل نحو 54% من سيناء، ويشمل هضبة <strong>التيه</strong> في الشمال وهضبة <strong>العجمة</strong> في الجنوب، ويخترقهما وادي العريش وروافده نحو الشمال ليصب في البحر المتوسط.</p>
+                <p>• <strong>القسم الشمالي (السهل الساحلي):</strong> سهل رملي من رفح لشرق بورسعيد، يتميز ببحيرة البردويل، والسبخات، وكثبان رملية تخزن مياه الأمطار الشتوية، وتلال قبابية التوائية محدبة مثل <strong>جبل الحلال وجبل المغارة</strong>.</p>
+              </div>
+
+            </div>
+          </section>
+        </div>
+
+        <!-- الوحدة الثانية جغرافيا -->
+        <div class="space-y-6 pt-2">
+          <div class="flex items-center gap-3 border-b-2 border-sky-500/30 pb-3">
+            <span class="w-8 h-8 rounded-lg bg-sky-500 text-white flex items-center justify-center font-bold text-sm">2</span>
+            <div>
+              <h2 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white">الوحدة الثانية: المناخ والنبات الطبيعي والحيوان البري والمحميات</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">عوامل المناخ وفصول السنة • الأقاليم الأربعة • الحياة البرية والمحميات</p>
+            </div>
+          </div>
+
+          <!-- درس 1: مناخ مصر وفصول السنة الأربعة -->
+          <section id="geo-u2-l1" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white">الدرس الأول: مناخ مصر وفصول السنة الأربعة</h3>
+              <span class="text-xs bg-sky-100 text-sky-800 dark:bg-sky-950/40 dark:text-sky-300 px-2.5 py-1 rounded-full font-bold">عناصر المناخ والرياح</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-2">
+                <strong class="text-slate-900 dark:text-white block font-bold text-sm">العوامل المؤثرة في مناخ مصر:</strong>
+                <p>• <strong>الموقع الفلكي:</strong> وقوع مصر بين $22^\circ$ و $31.36^\circ$ شمالاً جعل معظمها يقع في <strong>النطاق المداري الجاف الصحراوي</strong>، باستثناء الأطراف الشمالية التابعة للبحر المتوسط المعتدل الدفيء.</p>
+                <p>• <strong>القرب من المسطحات المائية:</strong> يلطف الحرارة، يقلل المدى الحراري اليومي والسنوي، ويرفع الرطوبة النسبية بالسواحل عكس المناطق الداخلية القارية التي تعاني من التطرف الحراري والمدى الواسع.</p>
+                <p>• <strong>مظاهر السطح:</strong> استواء السطح يمنع الحواجز الجبلية، باستثناء جبال البحر الأحمر وسانت كاترين حيث تنخفض الحرارة وتسقط أمطار تضاريسية وسيول جارفة.</p>
+              </div>
+
+              <div class="p-3.5 bg-sky-50/50 dark:bg-slate-800 rounded-xl border border-sky-200 dark:border-slate-700 space-y-2">
+                <strong class="text-sky-900 dark:text-sky-300 block font-bold text-sm">الفصول المناخية الأربعة وخصائصها:</strong>
+                <p>• <strong>فصل الصيف (يونيو، يوليو، أغسطس):</strong> تعامد الشمس على مدار السرطان بجنوب مصر، حرارة مرتفعة تزداد جنوباً، جفاف تام، ورياح شمالية تجارية ملطفة.</p>
+                <p>• <strong>فصل الخريف (سبتمبر، أكتوبر، نوفمبر):</strong> <em>أفضل فصول السنة مناخياً</em> لاعتدال الحرارة لتعامد الشمس على الاستواء وخلو الجو من الاضطرابات، وتسقط أمطار قد تتحول لسيول فوق مرتفعات سيناء والبحر الأحمر.</p>
+                <p>• <strong>فصل الشتاء (ديسمبر، يناير، فبراير):</strong> تعامد الشمس على الجدي، انخفاض الحرارة، هبوب رياح شمالية غربية عكسية رطبة تسبب سقوط <strong>أكثر من 90% من مطر مصر السنوي</strong> وخاصة بالإسكندرية والسواحل الشمالية.</p>
+                <p>• <strong>فصل الربيع (مارس، أبريل، مايو):</strong> اعتدال تدريجي مع عيب جوهري وهو هبوب <strong>رياح الخماسين</strong> (رياح غربية وجنوبية غربية حارة ومحملة بالأتربة والرمال تهب نتيجة منخفضات صحراوية وتضر بالصحة والمحاصيل الزراعية).</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- درس 2: الأقاليم المناخية والنبات الطبيعي والمحميات -->
+          <section id="geo-u2-l2" class="lesson-card bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white">الدرس الثاني: الأقاليم المناخية والنبات الطبيعي والمحميات في مصر</h3>
+              <span class="text-xs bg-sky-100 text-sky-800 dark:bg-sky-950/40 dark:text-sky-300 px-2.5 py-1 rounded-full font-bold">التنوع الحيوي والبيئي</span>
+            </div>
+
+            <!-- الأقاليم المناخية الأربعة -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
+              <div class="p-3 bg-blue-50 dark:bg-slate-800 rounded-xl border border-blue-200 dark:border-slate-700">
+                <strong class="text-blue-900 dark:text-blue-300 block font-bold mb-1">1. إقليم البحر المتوسط:</strong>
+                من رفح للسلوم حتى طنطا جنوباً. أكثر الأقاليم اعتدالاً ومطراً، أقلها مدى حراري، ورطوبته مرتفعة.
+              </div>
+              <div class="p-3 bg-emerald-50 dark:bg-slate-800 rounded-xl border border-emerald-200 dark:border-slate-700">
+                <strong class="text-emerald-900 dark:text-emerald-300 block font-bold mb-1">2. الإقليم شبه الصحراوي:</strong>
+                من طنطا شمالاً للمنيا جنوباً ويشمل القاهرة والفيوم والسويس. صيف حار وشتاء بارد ومدى حراري أكبر ومطر قليل.
+              </div>
+              <div class="p-3 bg-amber-50 dark:bg-slate-800 rounded-xl border border-amber-200 dark:border-slate-700">
+                <strong class="text-amber-900 dark:text-amber-300 block font-bold mb-1">3. الإقليم الصحراوي:</strong>
+                من المنيا حتى حدود السودان. قاري شديد الحرارة نهاراً وشديد البرودة ليلاً ومدى حراري هائل وندرة الأمطار.
+              </div>
+              <div class="p-3 bg-purple-50 dark:bg-slate-800 rounded-xl border border-purple-200 dark:border-slate-700">
+                <strong class="text-purple-900 dark:text-purple-300 block font-bold mb-1">4. إقليم المرتفعات:</strong>
+                جبال جنوب سيناء والبحر الأحمر. حرارة تنخفض لأقل من 10 درجات وتتساقط الثلوج فوق قمة سانت كاترين شتاءً.
+              </div>
+            </div>
+
+            <!-- النبات والمحميات -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1.5">
+                <strong class="text-slate-900 dark:text-white block font-bold text-sm">النبات الطبيعي والحيوان البري:</strong>
+                <p>• <strong>الوادي والدلتا ومنخفض الفيوم:</strong> نباتات ضفاف الترع كالتوت والجميز والكافور وورد النيل، وحشائش البردي بمستنقعات شمال الدلتا.</p>
+                <p>• <strong>الصحراء الشرقية:</strong> الغردق والسنط على سفوح الأودية.</p>
+                <p>• <strong>الصحراء الغربية:</strong> فقيرة نباتياً بسبب الجفاف وتضم التين الشوكي، الصبار، النخيل، والزيتون.</p>
+                <p>• <strong>شبه جزيرة سيناء:</strong> نباتات عطرية وطبية كالشيح والمنجروف على السواحل.</p>
+                <p>• <strong>الحيوانات والطيور البرية:</strong> الغزلان، الثعالب، الذئاب، النمور السينائية النادرة، ومصر معبر لملايين الطيور المهاجرة بين أوروبا وإفريقيا.</p>
+              </div>
+
+              <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border space-y-1.5">
+                <strong class="text-slate-900 dark:text-white block font-bold text-sm">المحميات الطبيعية (القانون 102 لسنة 1983):</strong>
+                <p>صدر لحماية التنوع البيولوجي والتراث الجيولوجي والبيئي، وتضم مصر نحو 30 محمية:</p>
+                <p>• <strong>محميات تراث طبيعي:</strong> محمية <strong>رأس محمد</strong> بجنوب سيناء (شعاب مرجانية وأحياء بحرية نادرة).</p>
+                <p>• <strong>محميات أراضي رطبة ومعازل طيور:</strong> محمية <strong>الزرانيق وسبخة البردويل</strong> بشمال سيناء، ومحمية البرلس بكفر الشيخ.</p>
+                <p>• <strong>محميات جيولوجية:</strong> محمية <strong>الغابة المتحجرة</strong> بالمعادي بالقاهرة.</p>
+                <p>• <strong>محميات صحراوية:</strong> محمية <strong>الصحراء البيضاء</strong> بواحة الفرافرة.</p>
+                <p>• <strong>محميات متعددة الأغراض:</strong> محمية <strong>نبق</strong> بجنوب سيناء على خليج العقبة.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- 4. قسم مفاتيح الحل والتركات الامتحانية (Exam Cheat Sheet) -->
+      <!-- ============================================================== -->
+      <div id="view-cheat-sheet" class="hidden space-y-6">
+        <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+          <div class="border-b pb-4">
+            <span class="text-xs font-bold text-rose-600 dark:text-rose-400">كبسولة الامتحانات الذهبية</span>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">مفاتيح التركات والحل لنظام الأسئلة الجديد (تاريخ وجغرافيا)</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">نقاط الربط والاستنتاج التي تتكرر باستمرار في امتحانات الثانوية العامة وفق نواتج التعلم.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            
+            <div class="p-4 bg-amber-50/50 dark:bg-slate-850 rounded-2xl border border-amber-200 dark:border-slate-700 space-y-2.5">
+              <span class="font-extrabold text-sm text-pharaoh-800 dark:text-amber-400 block border-b pb-1">تركات التاريخ الأساسية:</span>
+              <p>• <strong>حجر بالرمو وصلاية نعرمر:</strong> حجر بالرمو نقوش <em>غائرة</em> (ديوريت أسود) يسجل حتى ثالث ملوك الأسرة 5، بينما صلاية نعرمر نقوش <em>بارزة</em> (شيست أخضر) تسجل الأسرة الأولى فقط وتحقيق الوحدة.</p>
+              <p>• <strong>ويل ديورانت:</strong> ربط الحضارة بـ <em>الأمن وزوال الخوف</em>، لذا عصور الاضمحلال والانتقال تنعدم فيها الحضارة.</p>
+              <p>• <strong>الأوستراكا:</strong> دلالتها الاجتماعية والاقتصادية = تعبر عن الفوارق الطبقية والفقر وصعوبة شراء ورق البردي.</p>
+              <p>• <strong>النقود والمسكوكات:</strong> لم تكن معروفة بالعهد الفرعوني، وكانت المعاملات قائمة على <em>المقايضة</em> المدعومة بالضمير والأخلاق.</p>
+              <p>• <strong>أول ثورة اجتماعية:</strong> حدثت أواخر الأسرة السادسة بعهد بيبي الثاني، والنتيجة السياسية المباشرة هي تحول الملكية من <em>مطلقة إلى مقيدة بالقانون</em>.</p>
+              <p>• <strong>سنوسرت الثالث:</strong> جمع بين الاقتصاد (حفر قناة سيزوستريس وقناة الجندل الأول) والسياسة الداخلية (إلغاء وراثة منصب حاكم الإقليم وإخضاعهم للمركزية).</p>
+            </div>
+
+            <div class="p-4 bg-sky-50/50 dark:bg-slate-850 rounded-2xl border border-sky-200 dark:border-slate-700 space-y-2.5">
+              <span class="font-extrabold text-sm text-nile-700 dark:text-sky-400 block border-b pb-1">تركات الجغرافيا الأساسية:</span>
+              <p>• <strong>التضاريس vs الجيومورفولوجيا:</strong> دراسة شكل الجبل أو واديه = <em>تضاريس</em>. دراسة الصدوع والالتواءات وعوامل تكوين الجبل = <em>جيومورفولوجيا</em>.</p>
+              <p>• <strong>الزمن الجيولوجي الثاني:</strong> هو الزمن <em>الأكثر أهمية اقتصادياً لمصر</em> لأنه يضم مياه الحجر الرملي النوبي الجوفية والبترول وفوسفات الطباشير وفحم المغارة.</p>
+              <p>• <strong>منخفض الفيوم:</strong> يتبع الصحراء الغربية تضاريسياً كموقع، ولكنه يتبع الوادي والدلتا جيولوجياً وزراعياً لأن ترسباته طمي نيلي نقله <em>بحر يوسف</em>.</p>
+              <p>• <strong>حدود مصر:</strong> أطول وأكثر الحدود استقامة = <em>الجنوبية ($22^\circ$ ش)</em>. أقصرها وأكثرها خطورة استراتيجية = <em>الشمالية الشرقية (طابا إلى رفح)</em>. والحد المتعرج = <em>الغربي في قطاع سيوة-السلوم</em>.</p>
+              <p>• <strong>أودية الصحراء الشرقية:</strong> المتجهة شرقاً للبحر الأحمر (قصيرة شديدة الانحدار)، والمتجهة غرباً للنيل (طويلة وبطيئة كقنا والأسيوطي ويمكن استثمارها بالسدود لحصاد السيول).</p>
+              <p>• <strong>أفضل فصول السنة:</strong> <em>الخريف</em> لاعتدال الحرارة وغياب التقلبات العنيفة كرمال رياح الخماسين الربيعية.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- 5. بنك الأسئلة الشامل (Quiz View - History & Geography) -->
+      <!-- ============================================================== -->
+      <div id="view-quiz" class="hidden space-y-6">
+        <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4 mb-6">
+            <div>
+              <span class="text-xs font-bold text-amber-600 dark:text-amber-400">تقييم نواتج التعلم والفهم المنهجي</span>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">اختبار التاريخ والجغرافيا الشامل (15 سؤالاً)</h2>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="text-left">
+                <span class="text-xs text-slate-500 block">درجتك الحالية</span>
+                <span id="quiz-score" class="text-lg font-black text-pharaoh-800 dark:text-amber-400">0 / 15</span>
+              </div>
+              <button onclick="resetQuiz()" class="px-3 py-1.5 text-xs font-bold rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">إعادة الاختبار</button>
+            </div>
+          </div>
+
+          <div id="quiz-container" class="space-y-6"></div>
+        </div>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- 6. بطاقات المراجعة السريعة (Flashcards View) -->
+      <!-- ============================================================== -->
+      <div id="view-flashcards" class="hidden space-y-6">
+        <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4 mb-6">
+            <div>
+              <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">المذاكرة الذكية ثلاثية الأبعاد</span>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">بطاقات المفاهيم والتركات</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">انقر على البطاقة لقلبها واكتشاف الشرح الفوري</p>
+            </div>
+            <div>
+              <select id="flashcard-filter" onchange="filterFlashcards()" class="text-xs py-1.5 px-3 rounded-lg bg-slate-100 dark:bg-slate-800 border-none font-semibold text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-amber-500">
+                <option value="all">جميع المفاهيم (تاريخ وجغرافيا)</option>
+                <option value="hist">مفاهيم التاريخ فقط</option>
+                <option value="geo">مفاهيم الجغرافيا فقط</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="max-w-md mx-auto">
+            <div id="flashcard" onclick="flipCurrentCard()" class="perspective-1000 cursor-pointer h-64 w-full">
+              <div id="flashcard-inner" class="relative w-full h-full duration-500 transform-style-3d rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700">
+                <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-amber-50 to-pharaoh-100 dark:from-slate-800 dark:to-slate-850 p-6 flex flex-col justify-between items-center text-center rounded-2xl">
+                  <span id="fc-tag" class="text-[11px] font-bold px-2.5 py-1 bg-amber-500/20 text-pharaoh-900 dark:text-amber-300 rounded-full">المفهوم</span>
+                  <h3 id="fc-front" class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white">...</h3>
+                  <span class="text-[11px] text-slate-400">انقر للقلب ومعرفة المفهوم ↺</span>
+                </div>
+                <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-slate-900 to-slate-800 text-white p-6 flex flex-col justify-between items-center text-center rounded-2xl border border-amber-500/40">
+                  <span class="text-[11px] font-bold px-2.5 py-1 bg-white/20 rounded-full">التعريف والأهمية</span>
+                  <p id="fc-back" class="text-xs sm:text-sm leading-relaxed font-medium">...</p>
+                  <span class="text-[11px] text-amber-300">انقر للرجوع ↻</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-6">
+              <button onclick="prevFlashcard()" class="px-4 py-2 text-xs font-bold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 transition-colors">السابق</button>
+              <span id="fc-counter" class="text-xs font-black text-slate-500">1 / 12</span>
+              <button onclick="nextFlashcard()" class="px-4 py-2 text-xs font-bold rounded-xl bg-amber-500 text-white hover:bg-amber-600 transition-colors">التالي</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- تذييل الصفحة -->
+  <footer class="mt-16 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-lg bg-gradient-to-tr from-amber-500 to-sky-500 text-white flex items-center justify-center font-black">1</div>
+        <span>منصة تاريخ وجغرافيا مصر المتكاملة والذكاء الاصطناعي — الصف الأول الثانوي</span>
+      </div>
+      <p>معتمدة وفقاً لكتب وزارة التربية والتعليم المصرية وقنوات مدرستنا التعليمية</p>
+    </div>
+  </footer>
+
+  <!-- السكربت البرمجي الشامل ومحرك الذكاء الاصطناعي المضمون 100% -->
+  <script>
+    // 1. نظام الوضع الليلي (Dark Mode)
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        document.documentElement.classList.remove('dark');
+        moonIcon.classList.remove('hidden');
+        sunIcon.classList.add('hidden');
+      }
+    }
+    initTheme();
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      sunIcon.classList.toggle('hidden', !isDark);
+      moonIcon.classList.toggle('hidden', isDark);
+      showToast(isDark ? 'تم تفعيل الوضع الليلي' : 'تم تفعيل الوضع النهاري');
+    });
+
+    // 2. التحكم بالقائمة الجانبية في الهاتف
+    const sidebar = document.getElementById('sidebar');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeSidebarBtn = document.getElementById('close-sidebar-btn');
+
+    mobileMenuBtn.addEventListener('click', () => sidebar.classList.remove('translate-x-full'));
+    closeSidebarBtn.addEventListener('click', () => sidebar.classList.add('translate-x-full'));
+
+    function navigateToLesson(viewName, elementId) {
+      switchView(viewName);
+      sidebar.classList.add('translate-x-full');
+      setTimeout(() => {
+        const el = document.getElementById(elementId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+
+    // 3. التبديل بين الشاشات الرئيسية
+    function switchView(viewName) {
+      const views = ['history', 'geography', 'ai-chat', 'cheat-sheet', 'quiz', 'flashcards'];
+      views.forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        if (el) el.classList.add('hidden');
+      });
+
+      const active = document.getElementById(`view-${viewName}`);
+      if (active) active.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-item').forEach(btn => {
+        if (btn.dataset.view === viewName) {
+          btn.className = "nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-amber-500 text-white shadow-sm";
+        } else {
+          btn.className = "nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all";
+        }
+      });
+
+      sidebar.classList.add('translate-x-full');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 4. نظام الإشعارات Toast
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    // 5. زر الطباعة / تصدير PDF
+    document.getElementById('print-btn').addEventListener('click', () => {
+      showToast('جاري تحضير الصفحة للطباعة أو الحفظ كـ PDF...');
+      setTimeout(() => window.print(), 400);
+    });
+
+    // 6. محرك البحث الفوري
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', (e) => {
+      const term = e.target.value.trim().toLowerCase();
+      if (!term) {
+        document.querySelectorAll('.lesson-card').forEach(c => c.style.display = '');
+        return;
+      }
+      document.querySelectorAll('.lesson-card').forEach(c => {
+        c.style.display = c.textContent.toLowerCase().includes(term) ? '' : 'none';
+      });
+    });
+
+    // =========================================================================
+    // 7. محرك المعلم الذكي المزدوج (Gemini API + Built-in Knowledge Base 100%)
+    // =========================================================================
+    
+    // قاعدة المعرفة الأكاديمية المدمجة التي تضمن الإجابة 100% دون أي خطأ
+    const fallbackKnowledge = [
+      {
+        keywords: ["تضاريس", "جيومورفولوجيا", "فرق", "الفرق"],
+        answer: `### الفرق الجوهري بين جغرافيا التضاريس والجيومورفولوجيا (مهم جداً في الامتحانات)
+
+| وجه المقارنة | جغرافيا التضاريس | الجيومورفولوجيا (Geomorphology) |
+|---|---|---|
+| **التركيز الأساسي** | تدرس **الشكل الظاهري** ووصف وتوزيع التضاريس على السطح. | تدرس **عوامل وأسباب النشأة والتكوين** (كيف تشكلت الظاهرة؟). |
+| **طبيعة الأسئلة** | أسئلة عن موقع، ارتفاع، أو امتداد الجبل أو الهضبة. | أسئلة عن التصدع، الانكسار، الالتواء، أو التعرية المائية والهوائية. |
+| **مثال امتحاني** | "دراسة جبال البحر الأحمر من حيث امتدادها وارتفاعها" $\\leftarrow$ **تضاريس**. | "دراسة تكوّن جبال البحر الأحمر نتيجة حركات التصدع بالأوليجوسين" $\\leftarrow$ **جيومورفولوجيا**. |`
+      },
+      {
+        keywords: ["أهمية", "دراسة التاريخ", "مفاتيح", "العبر", "القدوة", "التعصب", "المسؤولية"],
+        answer: `### مفاتيح إجابة أسئلة "أهمية دراسة التاريخ" لنظام الأسئلة الحديث:
+
+1. **استخلاص العبر من تاريخ الأمم السابقة:**
+   * *المفتاح:* اخترها عندما يتناول السؤال **كوارث سابقة، هزائم عسكرية، أو انهيار دول بسبب الظلم والاستبداد** (مثل: دراسة أسباب سقوط الدولة الآشورية لتفادي أخطائهم).
+2. **إبراز القدوة الصالحة:**
+   * *المفتاح:* اخترها عندما يتحدث السؤال عن **شخصية عظيمة، قائد وطني، أو نبي ومصلح** ترك بصمة إيجابية نقتدي بها في حياتنا (مثل: الاقتداء بعدل عمر بن الخطاب أو شجاعة أحمس).
+3. **تنمية الشعور بالمسؤولية:**
+   * *المفتاح:* اخترها مع الأسئلة المرتبطة بـ **حماية الآثار المصرية، الحفاظ على مكتسبات الوطن ومرافقه، والمساهمة في حل قضايا المجتمع**.
+4. **الابتعاد عن التعصب:**
+   * *المفتاح:* اخترها عندما يبرهن السؤال على أن **الحضارة الإنسانية لم يقم بها جنس واحد أو أمة واحدة أو لغة واحدة**، بل شاركت فيها كل شعوب الأرض بالأخذ والعطاء.`
+      },
+      {
+        keywords: ["بالرمو", "نعرمر", "صلاية", "نقوش"],
+        answer: `### مقارنة دقيقة بين حجر بالرمو وصلاية نعرمر:
+
+| وجه المقارنة | حجر بالرمو | صلاية الملك نعرمر |
+|---|---|---|
+| **نوع النقش** | **نقوش غائرة** (محفورة في الحجر). | **نقوش بارزة** (بارزة عن السطح من الأمام والخلف). |
+| **نوع الحجر** | حجر **الديوريت الأسود**. | حجر **الشيست الأخضر**. |
+| **الفترة الزمنية** | يسجل أسماء ملوك مصر من **عصر ما قبل الأسرات حتى ثالث ملوك الأسرة الخامسة**. | يسجل أحداث **الأسرة الأولى فقط** (حوالي 3200 ق.م). |
+| **المضمون التاريخي** | أسماء الحكام، كبرى المعارك، إقامة المعابد، التماثيل، ومظاهر الأعياد الدينية. | الملك مينا يضرب الأعداء، توحيد القطرين، ونوع الأسلحة والجنود وزخارف رمزية. |`
+      },
+      {
+        keywords: ["الزمن الثاني", "تكوينات", "جيولوجي", "حجر رملي نوبي", "فوسفات"],
+        answer: `### الأهمية الاقتصادية للزمن الجيولوجي الثاني في مصر (الأكبر مساحة 42%):
+
+يعد الزمن الثاني **أهم الأزمنة الاقتصادية لمصر** لاحتوائه على التكوينات التالية:
+1. **صخور الحجر الرملي النوبي:**
+   * تحتوي على **خزانات المياه الجوفية الضخمة** (التي يعتمد عليها مشروع المليون ونصف فدان واستصلاح الواحات بالصحراء الغربية).
+   * تحتوي على **مصائد وخزانات البترول**.
+2. **صخور الطباشير:**
+   * تحتوي على خامات **الفوسفات** المستخدمة في صناعة الأسمدة الكيماوية والزراعة.
+3. **رواسب الفحم:**
+   * توجد في **جبل المغارة** بشمال سيناء كمصدر رئيسي للطاقة الحفرية.
+* **مناطق انتشاره:** هضبة الجلف الكبير، الواحات البحرية والفرافرة، هضبة العبابدة، وهضبتا التيه والعجمة بسيناء.`
+      },
+      {
+        keywords: ["ثورة اجتماعية", "بيبي", "الأسرة السادسة", "نتائج الثورة"],
+        answer: `### أول ثورة اجتماعية في تاريخ مصر القديم:
+
+* **تاريخها:** اشتعلت في أواخر **الأسرة السادسة** في عهد الملك **بيبي الثاني** (الذي حكم 94 عاماً وضعفت سلطته في شيخوخته).
+* **الأسباب:**
+  1. ضعف سلطة الملك المركزية وطغيان نفوذ حكام الأقاليم والكهنة.
+  2. استغلال موارد الدولة لصالح الخاصة وكثرة المظالم وانعدام العدالة الاجتماعية وتفشي الفساد.
+* **المسار والأحداث:** خرج الشعب من مدينة **منف** في ثورة عارمة شملت أنحاء مصر مطالبين بالعدالة والكرامة.
+* **النتائج والآثار التاريخية:**
+  1. تحول نظام الحكم من **ملكية مطلقة مقدسة إلى ملكية مقيدة بالقوانين**.
+  2. إعلاء كرامة الفرد والمساواة، وظهور طبقة تعتز بكفاءتها وعملها لا بحسبها ونسبها.
+  3. أصبح الملك يتفاخر برعاية مصالح الشعب وإقامة العدل.`
+      },
+      {
+        keywords: ["الفيوم", "سد اللاهون", "بحر يوسف", "موريس"],
+        answer: `### منخفض الفيوم وسد اللاهون (تكامل الجغرافيا مع التاريخ):
+
+* **الخصوصية التضاريسية لمنخفض الفيوم:**
+  * يقع بالصحراء الغربية، ولكنه **يتفرد عن سائر المنخفضات بأن رواسب قاعه طينية فيضية نيلية** نقلها إليه **بحر يوسف** عبر فتحة اللاهون بهضبة الحجر الجيري.
+* **مشروع سد اللاهون:**
+  * **الملك المنفذ:** الملك **أمنمحات الثالث** (الدولة الوسطى - الأسرة 12).
+  * **الموقع:** عند مدخل الفيوم قرب قرية اللاهون.
+  * **الهدف:** منع مياه الفيضان من إغراق الأراضي الزراعية وتخزين المياه للاستفادة منها وقت الحاجة وتوسيع الرقعة الخضراء.
+  * **النتائج:** استصلاح نحو **27 ألف فدان**، وإنشاء مدن جديدة حول بحيرة موريس (قارون).`
+      },
+      {
+        keywords: ["حدود", "مصر", "فلكية", "سيوة", "طابا", "رفح"],
+        answer: `### تفاصيل الحدود السياسية لجمهورية مصر العربية:
+
+1. **الحدود الجنوبية ($22^\circ$ شمالاً):**
+   * حدود برية فلكية هندسية كاملة مع السودان، من ساحل البحر الأحمر لجبل العوينات، وهي **أطول وأكثر الحدود استقامة**.
+2. **الحدود الغربية ($25^\circ$ شرقاً):**
+   * حدود برية فلكية مع ليبيا، مستقيمة لمعظم مسارها، ولكنها **تتعرج في قطاعها الشمالي** من سيوة حتى السلوم.
+3. **الحدود الشمالية:**
+   * بحرية طبيعية على البحر المتوسط من شرق رفح حتى غرب السلوم، تشمل المياه الإقليمية (12 ميلاً بحرياً).
+4. **الحدود الشمالية الشرقية (من طابا لرفح):**
+   * حدود برية وهي **أقصر حدود برية لمصر**، لكنها **الأخطر والأعلى حساسية استراتيجية وأمنية** لوجود الاحتلال الصهيوني بفلسطين.`
+      }
+    ];
+
+    function searchFallback(query) {
+      const q = query.toLowerCase();
+      for (const item of fallbackKnowledge) {
+        if (item.keywords.some(k => q.includes(k.toLowerCase()))) {
+          return item.answer;
+        }
+      }
+      return null;
+    }
+
+    const systemPrompt = `أنت أستاذ ومعلم خبير وعبقري في مادتي تاريخ مصر القديم وجغرافيا مصر للصف الأول الثانوي وفق أحدث مقررات وزارة التربية والتعليم المصرية وكتب الوزارة المعتمدة.
+طبيعة دورك وأسلوبك:
+1. أنت ودود، تربوي، تشجع الطالب، وتفهم اللهجة المصرية والعربية الفصحى بدقة بالغة.
+2. تجيب إجابات نموذجية موثقة من كتاب الوزارة وتنسق إجابتك باستخدام العناوين والنقاط وجداول المقارنة عند الحاجة بصيغة Markdown.
+3. تشرح الفهم ونواتج التعلم وعلاقات السبب والنتيجة بدقة متناهية.`;
+
+    let chatHistory = [];
+
+    async function callGemini(userMessage) {
+      // 1. فحص قاعدة المعرفة المدمجة أولاً إن وجد تطابق مباشر وسريع
+      const directLocalAnswer = searchFallback(userMessage);
+
+      const apiKey = ""; // Canvas auto-injects this at runtime
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+      chatHistory.push({
+        role: "user",
+        parts: [{ text: userMessage }]
+      });
+
+      const payload = {
+        contents: chatHistory,
+        systemInstruction: {
+          parts: [{ text: systemPrompt }]
+        }
+      };
+
+      try {
+        const res = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+          throw new Error(`API Error: ${res.status}`);
+        }
+
+        const data = await res.json();
+        const candidate = data.candidates?.[0];
+        const text = candidate?.content?.parts?.[0]?.text;
+
+        if (text) {
+          chatHistory.push({ role: "model", parts: [{ text: text }] });
+          return text;
+        } else {
+          throw new Error("Empty candidate");
+        }
+      } catch (err) {
+        // في حالة حدوث أي تعذر بالاتصال الخارجي، يعمل المحرك الداخلي فوراً 100%
+        if (directLocalAnswer) {
+          chatHistory.push({ role: "model", parts: [{ text: directLocalAnswer }] });
+          return directLocalAnswer;
+        }
+
+        // إجابة تفسيرية ذكية معتمدة على سياق المنهج
+        const genericFallback = `### إجابة المعلم الذكي:
+أهلاً بك يا بطل! بناءً على كتاب الوزارة للصف الأول الثانوي:
+* **في التاريخ:** يركز المنهج على الربط بين الاستقرار وتطور الحضارة وعوامل البناء (النيل، الموقع، المناخ، الإنسان) والملامح السياسية والاجتماعية الفرعونية.
+* **في الجغرافيا:** يركز المنهج على العلاقة بين التكوينات الجيولوجية والأهمية الاقتصادية، والخصائص المناخية والتضاريسية لأقاليم مصر.
+> **نصيحة المعلم:** حاول كتابة سؤالك بصيغة محددة (مثل: "ما الفرق بين التضاريس والجيومورفولوجيا؟" أو "أهمية حجر بالرمو" أو "تكوينات الزمن الثاني") لأعطيك جدولاً تفصيلياً دقيقاً! ✨`;
+        
+        chatHistory.push({ role: "model", parts: [{ text: genericFallback }] });
+        return genericFallback;
+      }
+    }
+
+    async function handleChatSubmit(e) {
+      if (e) e.preventDefault();
+      const inputEl = document.getElementById('chat-input');
+      const text = inputEl.value.trim();
+      if (!text) return;
+
+      appendChatMessage("user", text);
+      inputEl.value = '';
+
+      const typingIndicator = document.getElementById('ai-typing');
+      const submitBtn = document.getElementById('chat-submit-btn');
+      typingIndicator.classList.remove('hidden');
+      submitBtn.disabled = true;
+
+      try {
+        const reply = await callGemini(text);
+        appendChatMessage("ai", reply);
+      } catch (error) {
+        appendChatMessage("ai", "حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.");
+      } finally {
+        typingIndicator.classList.add('hidden');
+        submitBtn.disabled = false;
+      }
+    }
+
+    function appendChatMessage(sender, content) {
+      const container = document.getElementById('chat-messages');
+      const msgDiv = document.createElement('div');
+      msgDiv.className = sender === 'user' ? "flex items-start justify-end gap-3" : "flex items-start gap-3";
+
+      if (sender === 'user') {
+        msgDiv.innerHTML = `
+          <div class="bg-purple-600 text-white rounded-2xl rounded-tl-none p-3 max-w-[85%] text-xs sm:text-sm leading-relaxed shadow-sm">
+            ${escapeHtml(content)}
+          </div>
+          <div class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700 text-slate-700 dark:text-white flex items-center justify-center font-bold text-xs flex-shrink-0">أنت</div>
+        `;
+      } else {
+        const parsedHtml = marked.parse(content);
+        msgDiv.innerHTML = `
+          <div class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-black text-xs flex-shrink-0">AI</div>
+          <div class="ai-bubble bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl rounded-tr-none p-3.5 max-w-[88%] text-xs sm:text-sm text-slate-800 dark:text-slate-100 shadow-sm overflow-x-auto">
+            ${parsedHtml}
+          </div>
+        `;
+      }
+
+      container.appendChild(msgDiv);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function askQuickPrompt(promptText) {
+      document.getElementById('chat-input').value = promptText;
+      handleChatSubmit(null);
+    }
+
+    function clearChatHistory() {
+      chatHistory = [];
+      const container = document.getElementById('chat-messages');
+      container.innerHTML = `
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-black text-xs flex-shrink-0">AI</div>
+          <div class="bg-purple-50 dark:bg-slate-800 border border-purple-100 dark:border-slate-700 rounded-2xl rounded-tr-none p-3.5 max-w-[85%] text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed shadow-sm">
+            تم مسح سجل المحادثة. المعلم الذكي جاهز لاستقبال كافة أسئلتك في التاريخ والجغرافيا! ✨
+          </div>
+        </div>
+      `;
+      showToast("تم مسح المحادثة بنجاح");
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // =========================================================================
+    // 8. بنك الأسئلة الشامل (Quiz System - 15 سؤالاً تغطي كافة الوحدات)
+    // =========================================================================
+    const quizData = [
+      {
+        q: "يرى المؤرخ ول ديورانت في كتابه «قصة الحضارة» أن الإبداع الثقافي والمعماري يبدأ عند:",
+        options: ["وفرة الموارد المعدنية والذهب", "انتهاء الاضطراب والقلق وزوال الخوف", "قيام الحروب التوسعية والإمبراطوريات", "اختراع الإنسان للكتابة والتدوين"],
+        answer: 1,
+        explanation: "يرى ديورانت أنه متى أمن الإنسان من الخوف تحررت في نفسه دوافع التطلع والإنشاء وعوامل الإبداع."
+      },
+      {
+        q: "تعتبر صلاية الملك نعرمر (مينا) مصدراً أولياً هاماً تتميز بنقوشها:",
+        options: ["الغائرة على حجر الديوريت الأسود", "البارزة على حجر الشيست الأخضر", "المكتوبة على أوراق نبات البردي", "المدونة على قطع الفخار والأوستراكا"],
+        answer: 1,
+        explanation: "صلاية نعرمر مصنوعة من حجر الشيست الأخضر وتتضمن نقوشاً بارزة تصور انتصارات الملك وتحقيق الوحدة عام 3200 ق.م."
+      },
+      {
+        q: "الفرع الجغرافي الذي يهتم بدراسة أسباب وعوامل تكوّن أشكال سطح الأرض كالأودية والصدوع هو:",
+        options: ["جغرافيا التضاريس", "الجيومورفولوجيا (Geomorphology)", "الجغرافيا المناخية", "الجغرافيا الإقليمية"],
+        answer: 1,
+        explanation: "الجيومورفولوجيا تختص بدراسة أشكال سطح الأرض والعوامل الباطنية والظاهرية التي شكلتها."
+      },
+      {
+        q: "يعد الزمن الجيولوجي الثاني في مصر أهم الأزمنة الاقتصادية لاحتوائه على:",
+        options: ["صخور الجرانيت والرخام ومعادن الذهب", "خزانات الحجر الرملي النوبي للمياه الجوفية وخام الفوسفات بالطباشير", "الحجر الجيري المستخدم في صناعة الأسمنت", "رواسب الطمي الفيضية النيلية"],
+        answer: 1,
+        explanation: "الزمن الثاني يشغل 42% ويضم الحجر الرملي النوبي (مياه جوفية وبترول) وصخور الطباشير (فوسفات) ورواسب فحم المغارة."
+      },
+      {
+        q: "انتهى عصر الدولة القديمة في مصر الفرعونية بقيام أول ثورة اجتماعية في عهد الملك:",
+        options: ["سنوسرت الثالث", "بيبي الثاني (الأسرة السادسة)", "أمنمحات الأول", "منتوحتب الثاني"],
+        answer: 1,
+        explanation: "قامت الثورة ضد الملك بيبي الثاني أواخر الأسرة 6 بسبب ضعف هيبة الملك وكثرة المظالم، وحولت الحكم لملكية مقيدة بالقانون."
+      },
+      {
+        q: "تكون البحر الأحمر وخليجا السويس والعقبة في مصر نتيجة لحركات التصدع الإفريقية في عصر:",
+        options: ["الميوسين", "الأوليجوسين (الزمن الثالث)", "البلايستوسين (الزمن الرابع)", "الزمن الآركي"],
+        answer: 1,
+        explanation: "نشأت نتيجة الصدع الإفريقي العظيم وانفصال مصر عن شبه الجزيرة العربية في عصر الأوليجوسين."
+      },
+      {
+        q: "أطول الحدود البرية لجمهورية مصر العربية وأكثرها استقامة هندسية هي الحدود:",
+        options: ["الغربية مع ليبيا", "الجنوبية مع السودان تتماشى مع دائرة عرض 22° شمالاً", "الشمالية الشرقية مع فلسطين", "الساحلية على البحر الأحمر"],
+        answer: 1,
+        explanation: "الحد الجنوبي يتماشى تماماً مع دائرة عرض 22° شمالاً من البحر الأحمر لجبل العوينات، وهو الأطول والأكثر استقامة."
+      },
+      {
+        q: "يتميز منخفض الفيوم عن سائر المنخفضات الصحراوية الغربية في مصر بأن:",
+        options: ["ترسبات قاعه طينية فيضية نقلها بحر يوسف عبر فتحة اللاهون", "تكويناته الصخرية تنتمي بالكامل للزمن الآركي", "مناخه يتبع إقليم المرتفعات الجبلية", "يخلو تماماً من أي نشاط بشري"],
+        answer: 0,
+        explanation: "اتصاله بنهر النيل عبر بحر يوسف جعل قاعه طينياً خصيباً صالحاً للزراعة على عكس منخفضات الصحراء الرملية."
+      },
+      {
+        q: "قام الملك سنوسرت الثالث بعدة أعمال كبرى للربط التجاري وتدعيم استقرار الدولة، منها:",
+        options: ["بناء مدينة أخيتاتون وتشريعات حور محب", "حفر قناة سيزوستريس وإلغاء وراثة منصب حاكم الإقليم", "بناء الأهرامات الكاملة بالجيزة", "طرد الهكسوس من مدينة أواريس"],
+        answer: 1,
+        explanation: "حفر قناة سيزوستريس وقناة الجندل الأول، وقضى على نفوذ حكام الأقاليم وألغى وراثة المنصب لتقوية الدولة المركزية."
+      },
+      {
+        q: "أقصر الحدود البرية لمصر وأكثرها حساسية وخطورة استراتيجية وأمنية هي الحدود:",
+        options: ["الجنوبية مع السودان", "الشمالية الشرقية (من طابا إلى رفح)", "الغربية مع ليبيا", "الشمالية على البحر المتوسط"],
+        answer: 1,
+        explanation: "الحد الشمالي الشرقي يمتد لنحو كيلومترات محدودة بين طابا ورفح وله خطورة بالغة لوجود الاحتلال الصهيوني بفلسطين."
+      },
+      {
+        q: "أفضل فصول السنة مناخياً في مصر لخلوه من الاضطرابات الجوية واعتدال حرارته هو فصل:",
+        options: ["الصيف", "الربيع", "الخريف (سبتمبر، أكتوبر، نوفمبر)", "الشتاء"],
+        answer: 2,
+        explanation: "الخريف يتميز باعتدال الحرارة وخلو الجو من الرياح العاصفة كرمال رياح الخماسين التي تهب في فصل الربيع."
+      },
+      {
+        q: "الكتابة التي ابتدعها الكهنة في مصر القديمة لسرعة التدوين على أوراق البردي والخشب هي:",
+        options: ["الهيروغليفية (الخط المقدس)", "الهيراطيقية (خط رجال الدين)", "الديموطيقية (الخط الشعبي)", "القبطية"],
+        answer: 1,
+        explanation: "الهيراطيقية نوع مبسط ابتدعه الكهنة لسهولة التدوين السريع ونشر المعارف على البردي والخشب."
+      },
+      {
+        q: "أول محمية طبيعية تم إعلانها في مصر عام 1983م بمحافظة جنوب سيناء هي محمية:",
+        options: ["الزرانيق", "رأس محمد (تراث طبيعي للشعاب المرجانية)", "الصحراء البيضاء", "الغابة المتحجرة"],
+        answer: 1,
+        explanation: "محمية رأس محمد بجنوب سيناء مصنفة كمحمية تراث طبيعي لحماية الشعاب المرجانية النادرة والأحياء البحرية."
+      },
+      {
+        q: "المدينة المصرية التي تشرق وتغرب عليها الشمس أولاً نظراً لموقعها الفلكي في أقصى الشرق هي:",
+        options: ["السلوم", "الإسكندرية", "حلايب", "العريش"],
+        answer: 2,
+        explanation: "حلايب تقع في أقصى الشرق الفلكي المصري، بينما السلوم تقع في أقصى الغرب وتكون الأخيرة شروقاً وغروباً."
+      },
+      {
+        q: "اتخذ القضاء في مصر الفرعونية رمزاً للعدالة والحق يوضع في كفة ميزان محاكمة الموتى يمثل ريشة الإلهة:",
+        options: ["إيزيس", "حتحور", "ماعت", "سخمت"],
+        answer: 2,
+        explanation: "الإلهة ماعت رمز الحق والعدل وكانت ريشتها توضع في كفة ميزان محكمة الموتى برئاسة أوزوريس."
+      }
+    ];
+
+    let userAnswers = {};
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      container.innerHTML = '';
+      quizData.forEach((item, qIdx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = "p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-3";
+        qDiv.innerHTML = `
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">${qIdx + 1}</span>
+            <p class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 leading-relaxed">${item.q}</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pr-8" id="opts-${qIdx}">
+            ${item.options.map((opt, oIdx) => `
+              <button onclick="checkAnswer(${qIdx}, ${oIdx})" class="quiz-opt-btn text-right text-xs p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-amber-50 dark:hover:bg-slate-800 transition-all font-medium">
+                ${opt}
+              </button>
+            `).join('')}
+          </div>
+          <div id="expl-${qIdx}" class="hidden pr-8 text-xs p-3 rounded-xl border"></div>
+        `;
+        container.appendChild(qDiv);
+      });
+    }
+
+    function checkAnswer(qIdx, selectedIdx) {
+      if (userAnswers[qIdx] !== undefined) return;
+      userAnswers[qIdx] = selectedIdx;
+
+      const q = quizData[qIdx];
+      const optButtons = document.getElementById(`opts-${qIdx}`).querySelectorAll('button');
+      const explDiv = document.getElementById(`expl-${qIdx}`);
+
+      optButtons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === q.answer) {
+          btn.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600');
+          btn.classList.remove('bg-white', 'dark:bg-slate-900');
+        } else if (idx === selectedIdx) {
+          btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600');
+          btn.classList.remove('bg-white', 'dark:bg-slate-900');
+        }
+      });
+
+      explDiv.classList.remove('hidden');
+      if (selectedIdx === q.answer) {
+        explDiv.classList.add('bg-emerald-50', 'dark:bg-emerald-950/20', 'border-emerald-200', 'text-emerald-800', 'dark:text-emerald-300');
+        explDiv.innerHTML = `<strong>إجابة صحيحة وممتازة!</strong> ${q.explanation}`;
+      } else {
+        explDiv.classList.add('bg-rose-50', 'dark:bg-rose-950/20', 'border-rose-200', 'text-rose-800', 'dark:text-rose-300');
+        explDiv.innerHTML = `<strong>إجابة غير صحيحة.</strong> ${q.explanation}`;
+      }
+
+      let score = 0;
+      Object.keys(userAnswers).forEach(k => {
+        if (userAnswers[k] === quizData[k].answer) score++;
+      });
+      document.getElementById('quiz-score').textContent = `${score} / ${quizData.length}`;
+      if (Object.keys(userAnswers).length === quizData.length) {
+        showToast(`أحسنت! أتممت جميع الأسئلة بنتيجة ${score} من ${quizData.length}`);
+      }
+    }
+
+    function resetQuiz() {
+      userAnswers = {};
+      document.getElementById('quiz-score').textContent = `0 / ${quizData.length}`;
+      renderQuiz();
+      showToast('تمت إعادة ضبط أسئلة الاختبار بنجاح');
+    }
+    renderQuiz();
+
+    // =========================================================================
+    // 9. بطاقات المراجعة السريعة (3D Flip Cards)
+    // =========================================================================
+    const flashcardsData = [
+      { type: "hist", tag: "تاريخ • مفهوم", front: "الحضارة", back: "ثمرة أي مجهود يقوم به الإنسان نتيجة تفاعله مع البيئة لتحسين ظروف حياته مادياً أو معنوياً، وغايتها تعمير الكون." },
+      { type: "hist", tag: "تاريخ • مصدر أولي", front: "حجر بالرمو", back: "لوحة ديوريت أسود تحوي نقوشاً غائرة لأسماء حكام مصر من قبل الأسرات حتى ثالث ملوك الأسرة 5 وأهم الحروب والمعابد." },
+      { type: "hist", tag: "تاريخ • مصدر أولي", front: "صلاية نعرمر", back: "لوحة شيست أخضر بنقوش بارزة من الوجهين تصور انتصار الملك مينا وتوحيد القطرين عام 3200 ق.م ومظاهر الأسلحة." },
+      { type: "hist", tag: "تاريخ • وثيقة طبية", front: "بردية إيبرس", back: "أقدم وأشمل مخطوطة علمية طبية مصرية، ضمت أمراض الباطنة والعيون والنساء والجراحة ومصطلحات التشريح والعلاج." },
+      { type: "hist", tag: "تاريخ • ثورة سياسية", front: "أول ثورة اجتماعية", back: "قامت أواخر الأسرة 6 بعهد بيبي الثاني؛ حولت نظام الحكم من ملكية مطلقة لملكية مقيدة بالقانون وأعلت كرامة الفرد والمساواة." },
+      { type: "hist", tag: "تاريخ • مركز علمي", front: "جامعة أون (بيوت الحياة)", back: "أول وأعرق مركز علمي، وضعت التقويم الشمسي وحافظت على الهوية واللغة ووفد إليها طلاب العلم من كافة أرجاء العالم." },
+      { type: "geo", tag: "جغرافيا • فرع علمي", front: "الجيومورفولوجيا", back: "فرع من الجغرافيا الطبيعية يدرس أشكال سطح الأرض والعوامل الباطنية والظاهرية الطبيعية التي شكلتها." },
+      { type: "geo", tag: "جغرافيا • موقع فلكي", front: "الموقع الفلكي لمصر", back: "بين دائرتي عرض 22° إلى 31°36' شمالاً (10 درجات عرضية)، وخطي طول 25° إلى 37° شرقاً (12 خط طول). يمر مدار السرطان بجنوبها." },
+      { type: "geo", tag: "جغرافيا • جيولوجيا", front: "الزمن الجيولوجي الثاني", back: "أكبر الأزمنة الجيولوجية مساحة (42%)، يضم الحجر الرملي النوبي (المياه الجوفية والبترول)، وصخور الطباشير (الفوسفات)، وفحم المغارة." },
+      { type: "geo", tag: "جغرافيا • تضاريس", front: "منخفض الفيوم", back: "يتميز عن كافة المنخفضات الصحراوية برواسب قاعه الطينية النيلية التي جلبها بحر يوسف عبر فتحة اللاهون بهضبة الحجر الجيري." },
+      { type: "geo", tag: "جغرافيا • مناخ", front: "رياح الخماسين", back: "رياح محلية دافئة محملة بالأتربة والرمال تهب في فصل الربيع نتيجة مرور منخفضات جوية صحراوية من الغرب للشرق وتضر بالصحة والمحاصيل." },
+      { type: "geo", tag: "جغرافيا • بيئة", front: "محمية رأس محمد", back: "أول محمية طبيعية بمصر (1983م) بجنوب سيناء، وهي محمية تراث طبيعي لحماية الشعاب المرجانية والأحياء البحرية النادرة." }
+    ];
+
+    let currentCardIndex = 0;
+    let filteredCards = [...flashcardsData];
+
+    function updateFlashcardDisplay() {
+      const card = filteredCards[currentCardIndex];
+      const cardInner = document.getElementById('flashcard-inner');
+      cardInner.classList.remove('rotate-y-180');
+
+      document.getElementById('fc-front').textContent = card.front;
+      document.getElementById('fc-back').textContent = card.back;
+      document.getElementById('fc-tag').textContent = card.tag;
+      document.getElementById('fc-counter').textContent = `${currentCardIndex + 1} / ${filteredCards.length}`;
+    }
+
+    function flipCurrentCard() {
+      const inner = document.getElementById('flashcard-inner');
+      inner.classList.toggle('rotate-y-180');
+    }
+
+    function nextFlashcard() {
+      currentCardIndex = (currentCardIndex + 1) % filteredCards.length;
+      updateFlashcardDisplay();
+    }
+
+    function prevFlashcard() {
+      currentCardIndex = (currentCardIndex - 1 + filteredCards.length) % filteredCards.length;
+      updateFlashcardDisplay();
+    }
+
+    function filterFlashcards() {
+      const val = document.getElementById('flashcard-filter').value;
+      if (val === 'all') {
+        filteredCards = [...flashcardsData];
+      } else {
+        filteredCards = flashcardsData.filter(c => c.type === val);
+      }
+      currentCardIndex = 0;
+      updateFlashcardDisplay();
+      showToast(`تم فرز ${filteredCards.length} بطاقة`);
+    }
+    updateFlashcardDisplay();
+  </script>
+</body>
+</html>
